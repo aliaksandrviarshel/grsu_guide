@@ -12,8 +12,9 @@ class GalleriesPage extends StatefulWidget {
 class _GalleriesPageState extends State<GalleriesPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: GuideWrapper(child: Center(child: Text('map'))),
+    return Scaffold(
+      backgroundColor: const Color(0xffcccde1),
+      body: GuideWrapper(child: Image.asset('assets/images/galleries/map.png')),
     );
   }
 }

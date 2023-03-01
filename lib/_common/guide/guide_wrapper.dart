@@ -17,6 +17,7 @@ class GuideWrapper extends StatelessWidget {
     final guideImageWidth = guideImageHeight * _guideImageRatio;
 
     return Stack(
+      fit: StackFit.expand,
       children: [
         child,
         Positioned(
