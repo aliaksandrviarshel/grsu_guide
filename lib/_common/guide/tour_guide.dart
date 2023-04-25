@@ -2,14 +2,10 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:grsu_guide/_common/guide/message.dart';
 
-class GuideWrapper extends StatelessWidget {
-  final Widget child;
+class TourGuide extends StatelessWidget {
   final _guideImageRatio = 237 / 467;
 
-  const GuideWrapper({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const TourGuide({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +15,6 @@ class GuideWrapper extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        child,
         Positioned(
           bottom: 0,
           right: 0,

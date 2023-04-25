@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => const GalleriesPage(),
+        '/': (context) => const GalleriesPage(mapId: 'eb94f6b4-06ff-4dd3-9ec6-36f5a7baa2b9'),
       },
     );
   }
