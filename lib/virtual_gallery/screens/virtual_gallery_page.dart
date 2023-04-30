@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_service.dart';
 
+import '../../navigation/app_drawer.dart';
 import '../services/picture_dto.dart';
 
 // TODO: move assets to database
@@ -13,11 +14,12 @@ class VirtualGalleryPage extends StatefulWidget {
 }
 
 class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
-  late final List<PictureDto> imageData;
+  late List<PictureDto> _imageData;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawer(),
       backgroundColor: const Color(0xffC8C8D0),
       body: FutureBuilder(
           future: VirtualGalleryService().getPictures(),
@@ -26,7 +28,7 @@ class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
               return const Center(child: CircularProgressIndicator());
             }
 
-            imageData = snapshot.requireData;
+            _imageData = snapshot.requireData;
             return NestedScrollView(
               body: SingleChildScrollView(
                   child: Padding(
@@ -40,6 +42,7 @@ class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
                     expandedHeight: 120,
                     pinned: true,
                     centerTitle: true,
+                    automaticallyImplyLeading: false,
                     title: Text(
                       'Виртуальная галерея',
                       style: TextStyle(fontSize: 24, color: Colors.black),
@@ -59,7 +62,7 @@ class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
   }
 
   List<Widget> _getImages() {
-    return imageData
+    return _imageData
         .map((e) => Picture(
               picture: e,
             ))

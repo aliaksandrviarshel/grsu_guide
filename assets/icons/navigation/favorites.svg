@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="37" height="46" fill="none" viewBox="0 0 37 46">
+  <path fill="#F0EEFF" d="M32.51 31.722c0 7.667-6.215 13.882-13.882 13.882S4.746 39.39 4.746 31.722V11.877a1 1 0 0 1 1.35-.936l12.995 4.867 12.048-4.824a1 1 0 0 1 1.372.928v19.81Z"/>
+  <g filter="url(#a)">
+    <path fill="#F9F7FF" fill-opacity=".1" d="M32.51 31.722H4.747V9.882a5 5 0 0 1 5-5H27.51a5 5 0 0 1 5 5v21.84Z" shape-rendering="crispEdges"/>
+    <path stroke="url(#b)" stroke-width=".5" d="M32.26 31.472H4.997V9.882a4.75 4.75 0 0 1 4.75-4.75H27.51a4.75 4.75 0 0 1 4.75 4.75v21.59Z" shape-rendering="crispEdges"/>
+    <path stroke="#000" stroke-opacity=".2" stroke-width=".5" d="M32.26 31.472H4.997V9.882a4.75 4.75 0 0 1 4.75-4.75H27.51a4.75 4.75 0 0 1 4.75 4.75v21.59Z" shape-rendering="crispEdges"/>
+  </g>
+  <path fill="#9295FE" d="M19.359 42.915a1 1 0 0 1-1.743 0l-.96-1.704a1 1 0 0 0-.673-.49l-1.918-.386a1 1 0 0 1-.538-1.657l1.324-1.44a1 1 0 0 0 .257-.792l-.225-1.943a1 1 0 0 1 1.41-1.024l1.778.814a1 1 0 0 0 .833 0l1.778-.814a1 1 0 0 1 1.41 1.024l-.225 1.943a1 1 0 0 0 .258.792l1.323 1.44a1 1 0 0 1-.538 1.657l-1.918.386a1 1 0 0 0-.673.49l-.96 1.704Z"/>
+  <defs>
+    <radialGradient id="b" cx="0" cy="0" r="1" gradientTransform="matrix(-1.38835 -18.04738 18.66964 -1.43622 18.628 18.302)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9D9D9"/>
+      <stop offset="1" stop-color="#D9D9D9" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="a" width="35.765" height="34.84" x=".746" y=".882" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feGaussianBlur in="BackgroundImageFix" stdDeviation="2"/>
+      <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_13_225"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset/>
+      <feGaussianBlur stdDeviation="2"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix values="0 0 0 0 0.603922 0 0 0 0 0.533333 0 0 0 0 0.996078 0 0 0 1 0"/>
+      <feBlend in2="effect1_backgroundBlur_13_225" result="effect2_dropShadow_13_225"/>
+      <feBlend in="SourceGraphic" in2="effect2_dropShadow_13_225" result="shape"/>
+    </filter>
+  </defs>
+</svg>

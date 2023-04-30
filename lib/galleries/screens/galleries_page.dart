@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grsu_guide/_common/guide/tour_guide.dart';
 import 'package:grsu_guide/galleries/area_of_interest.dart';
 
+import '../../navigation/app_drawer.dart';
 import '../bottom_sheet/place_info_bottom_sheet..dart';
 import '../interactive_map.dart';
 import '../services/map_service.dart';
@@ -22,33 +23,22 @@ class GalleriesPage extends StatefulWidget {
 
 class _GalleriesPageState extends State<GalleriesPage>
     with TickerProviderStateMixin, WidgetsBindingObserver {
-  static const bgColor = Color(0xffcccde1);
+  static const _bgColor = Color(0xffcccde1);
   final GlobalKey _imageKey = GlobalKey();
   final _transformationController = TransformationController();
   late final InteractiveMap _map;
-
   var _isInitial = true;
   var _showGuide = true;
   var _showBackArrow = false;
 
   Future<void> _initMap(BuildContext context, Size renderedSize) async {
     _map = await MapService().getMap(
-        renderedSize, _imageKey, _transformationController, this, (area) {
-      if (area.isLeaf) {
-        _openBottomSheet(context, area);
-        return;
-      }
-
-      _isInitial = !_map.isZoomed();
-      if (_isInitial) {
-        _showGuide = true;
-      }
-      if (!_isInitial) {
-        _showBackArrow = true;
-      }
-
-      setState(() {});
-    });
+      renderedSize,
+      _imageKey,
+      _transformationController,
+      this,
+      _onAreaTap,
+    );
   }
 
   @override
@@ -97,7 +87,8 @@ class _GalleriesPageState extends State<GalleriesPage>
               : null,
         ),
       ),
-      backgroundColor: bgColor,
+      drawer: const AppDrawer(),
+      backgroundColor: _bgColor,
       body: FutureBuilder(
           future: MapService().getImageSrc(widget.mapId),
           builder: (context, snapshot) {
@@ -158,5 +149,22 @@ class _GalleriesPageState extends State<GalleriesPage>
         },
       );
     });
+  }
+
+  void _onAreaTap(AreaOfInterest area) {
+    if (area.isLeaf) {
+      _openBottomSheet(context, area);
+      return;
+    }
+
+    _isInitial = !_map.isZoomed();
+    if (_isInitial) {
+      _showGuide = true;
+    }
+    if (!_isInitial) {
+      _showBackArrow = true;
+    }
+
+    setState(() {});
   }
 }

@@ -15,6 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        drawerTheme: const DrawerThemeData(
+          scrimColor: Color.fromRGBO(202, 208, 232, 0.32),
+        ),
+      ),
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
