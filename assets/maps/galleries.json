@@ -1,84 +1,84 @@
 {
     "areas": [
         {
-            "coordinates": "90,879,725,1250",
+            "coordinates": "38,387,680,812",
             "shape": "rect",
             "childAreas": [
                 {
                     "placeId": 1,
-                    "coordinates": "143,1023,359,1202",
+                    "coordinates": "92,574,309,745",
                     "shape": "rect",
                     "childAreas": []
                 }
             ]
         },
         {
-            "coordinates": "761,830,1432,1275",
+            "coordinates": "191,829,918,1396",
             "shape": "rect",
             "childAreas": [
                 {
                     "placeId": 2,
-                    "coordinates": "1073,923,1334,1209",
+                    "coordinates": "582,920,769,1093",
                     "shape": "rect",
                     "childAreas": []
                 }
             ]
         },
         {
-            "coordinates": "443,535,1019,818",
+            "coordinates": "980,942,1743,1523",
             "shape": "rect",
             "childAreas": [
                 {
                     "placeId": 1,
-                    "coordinates": "1073,923,1334,1209",
+                    "coordinates": "1376,1037,1641,1247",
                     "shape": "rect",
                     "childAreas": []
                 }
             ]
         },
         {
-            "coordinates": "1034,509,1604,814",
+            "coordinates": "687,373,1429,850",
             "shape": "rect",
             "childAreas": [
                 {
                     "placeId": 1,
-                    "coordinates": "1073,923,1334,1209",
+                    "coordinates": "1012,465,1311,740",
                     "shape": "rect",
                     "childAreas": []
                 }
             ]
         },
         {
-            "coordinates": "1457,830,2112,1316",
+            "coordinates": "1433,307,2075,928",
             "shape": "rect",
             "childAreas": [
                 {
                     "placeId": 1,
-                    "coordinates": "1073,923,1334,1209",
+                    "coordinates": "1012,465,1311,740",
                     "shape": "rect",
                     "childAreas": []
                 }
             ]
         },
         {
-            "coordinates": "1030,1411,1794,1883",
+            "coordinates": "985,1,1565,368",
             "shape": "rect",
             "childAreas": [
                 {
                     "placeId": 1,
-                    "coordinates": "1073,923,1334,1209",
+                    "coordinates": "1012,465,1311,740",
                     "shape": "rect",
                     "childAreas": []
                 }
             ]
         },
         {
-            "coordinates": "266,1285,956,1834",
+            "coordinates": "367,3,977,378",
             "shape": "rect",
             "childAreas": [
                 {
                     "placeId": 1,
-                    "coordinates": "1073,923,1334,1209",
+                    "coordinates": "1012,465,1311,740",
                     "shape": "rect",
                     "childAreas": []
                 }

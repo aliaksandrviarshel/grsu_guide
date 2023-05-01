@@ -28,7 +28,7 @@ class _GalleriesPageState extends State<GalleriesPage>
     with TickerProviderStateMixin, WidgetsBindingObserver {
   final GlobalKey _imageKey = GlobalKey();
   final _transformationController = TransformationController();
-  late final InteractiveMap _map;
+  InteractiveMap? _map;
   var _isInitial = true;
   var _showGuide = true;
   var _showBackArrow = false;
@@ -41,16 +41,17 @@ class _GalleriesPageState extends State<GalleriesPage>
       this,
       _onAreaTap,
     );
+    _map!.init();
   }
 
   @override
   void dispose() {
-    _map.dispose();
+    _map?.dispose();
     super.dispose();
   }
 
   Future<void> _onTapUp(TapUpDetails details) async {
-    await _map.tap(details);
+    await _map!.tap(details);
     if (!_isInitial) {
       _showGuide = false;
     } else {
@@ -90,11 +91,12 @@ class _GalleriesPageState extends State<GalleriesPage>
                   onTapUp: _onTapUp,
                   child: InteractiveViewer(
                     scaleEnabled: false,
+                    panAxis: _map?.isZoomed() ?? true
+                        ? PanAxis.free
+                        : PanAxis.vertical,
                     transformationController: _transformationController,
                     child: LayoutBuilder(builder: (context, constraints) {
-                      try {
-                        _map == null;
-                      } catch (e) {
+                      if (_map == null) {
                         _initMap(
                           context,
                           Size(constraints.maxWidth, constraints.maxHeight),
@@ -125,7 +127,7 @@ class _GalleriesPageState extends State<GalleriesPage>
       return;
     }
 
-    _isInitial = !_map.isZoomed();
+    _isInitial = !_map!.isZoomed();
     if (_isInitial) {
       _showGuide = true;
     } else {
@@ -158,7 +160,7 @@ class _GalleriesPageState extends State<GalleriesPage>
     _isInitial = true;
     _showGuide = true;
     setState(() {});
-    await _map.zoomOut();
+    await _map!.zoomOut();
     _showBackArrow = false;
     setState(() {});
   }

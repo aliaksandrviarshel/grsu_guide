@@ -20,6 +20,12 @@ class MapService {
     TickerProvider tickerProvider,
     void Function(AreaOfInterest) onTapped,
   ) async {
+    final map = InteractiveMap(
+      renderedSize,
+      transformationController,
+      onTapped,
+    );
+
     final jsonString =
         await rootBundle.loadString('assets/maps/galleries.json');
     var mapDto = MapDto.fromJson(jsonString);
@@ -33,15 +39,11 @@ class MapService {
               tickerProvider,
               onTapped,
               e.placeId,
+              map,
             ))
         .toList();
-
-    return InteractiveMap(
-      areas,
-      renderedSize,
-      transformationController,
-      onTapped,
-    );
+    map.areas = areas;
+    return map;
   }
 
   Future<Size> _getImageSize(String assetName) {

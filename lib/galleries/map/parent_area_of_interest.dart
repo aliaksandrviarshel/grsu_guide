@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:grsu_guide/galleries/map/relative_area.dart';
 
 import 'area_of_interest.dart';
+import 'interactive_map.dart';
 
 class ParentAreaOfInterest implements AreaOfInterest {
   final List<AreaOfInterest> _childAreas;
@@ -16,7 +17,7 @@ class ParentAreaOfInterest implements AreaOfInterest {
   final _defaultScale = 1.7;
   final _targetScale = 3.0;
   final void Function(AreaOfInterest) onTapped;
-
+  final InteractiveMap _map;
   final RelativeArea _relativeArea;
   late Matrix4Tween _tween;
 
@@ -30,6 +31,7 @@ class ParentAreaOfInterest implements AreaOfInterest {
     this._tickerProvider,
     this.onTapped,
     this._childAreas,
+    this._map,
   ) {
     _animationController = AnimationController(
       vsync: _tickerProvider,
@@ -51,6 +53,10 @@ class ParentAreaOfInterest implements AreaOfInterest {
   @override
   Future<void> tap(TapUpDetails details) async {
     if (!_isZoomed) {
+      if (!_map.isZoomed()) {
+        return;
+      }
+
       onTapped(this);
       await _zoomIn();
       _isZoomed = true;
@@ -107,14 +113,38 @@ class ParentAreaOfInterest implements AreaOfInterest {
     return _animationController.forward();
   }
 
-  // TODO: fix zoom to a point
   Matrix4 _getZoomedMatrix() {
-    final x = -_relativeArea.rect.left * (_targetScale - 1);
-    final y = -_relativeArea.rect.center.dy * (_targetScale - 1);
+    double smallX = getXOffset();
+    final x = _relativeArea.rect.center.dx - smallX;
+    final y = _relativeArea.rect.center.dy;
+    print([smallX]);
     final matrix = Matrix4.identity()
       ..translate(x, y)
-      ..scale(_targetScale);
+      ..scale(_targetScale)
+      ..translate(-x, -y);
     return matrix;
+  }
+
+  double getXOffset() {
+    final renderedSize = _imageKey.currentContext!.size!;
+    final bigWidth = renderedSize.width;
+    final rect = _relativeArea.rect;
+
+    final bigX = (bigWidth - _relativeArea.rect.center.dx) / 2;
+    final percentage = bigX / bigWidth;
+    return rect.width *
+        percentage *
+        (bigWidth / 2 - _relativeArea.rect.left).sign;
+  }
+
+  double getYOffset() {
+    final renderedSize = _imageKey.currentContext!.size!;
+    final bigHeight = renderedSize.height;
+    final bigY = (renderedSize.height - _relativeArea.rect.center.dy) / 2;
+    final percentage = bigY / renderedSize.height;
+    return _relativeArea.rect.height *
+        percentage *
+        (bigHeight / 2 - _relativeArea.rect.center.dx).sign;
   }
 
   Matrix4 _getDefaultMatrix() {

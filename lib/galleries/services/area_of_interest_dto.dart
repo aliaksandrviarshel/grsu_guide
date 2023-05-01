@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 
+import 'package:grsu_guide/galleries/map/interactive_map.dart';
 import 'package:grsu_guide/galleries/map/leaf_area_of_interest.dart';
 import 'package:grsu_guide/galleries/map/relative_area.dart';
 
@@ -29,6 +30,7 @@ class AreaOfInterestDto {
     TickerProvider tickerProvider,
     void Function(AreaOfInterest) onTapped,
     int? placeId,
+    InteractiveMap map,
   ) {
     final relativeArea = RelativeArea.fromRect(
       _AreaOfInterestCoordinates(coordinates).getRect(),
@@ -59,8 +61,10 @@ class AreaOfInterestDto {
                 tickerProvider,
                 onTapped,
                 e.placeId,
+                map,
               ))
           .toList(),
+      map,
     );
   }
 
