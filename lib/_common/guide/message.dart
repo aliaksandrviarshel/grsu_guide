@@ -11,9 +11,9 @@ class MessageBox extends StatelessWidget {
       Image.asset('assets/images/guide_woman/message.png'),
       Positioned.fill(
         child: Align(
-          child: Text(
-            message,
-            textAlign: TextAlign.center,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Text(message),
           ),
         ),
       ),

@@ -67,6 +67,7 @@ flutter:
       - assets/images/guide_woman/
       - assets/images/galleries/
       - assets/images/vr_gallery/
+      - assets/images/favorites/
       - assets/images/splash/
       - assets/maps/
       - assets/icons/

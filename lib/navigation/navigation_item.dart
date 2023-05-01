@@ -83,7 +83,7 @@ final _navItems = [
   ),
   NavigationItem(
     route: Routes.favorites,
-    routeName: 'empty',
+    routeName: '/favorites',
     name: 'Избранное',
     smallIcon: Image.asset(
       'assets/icons/navigation/favorites_small.png',
