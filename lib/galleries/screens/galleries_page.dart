@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'package:grsu_guide/_common/guide/tour_guide.dart';
-import 'package:grsu_guide/galleries/area_of_interest.dart';
+import 'package:grsu_guide/galleries/map/leaf_area_of_interest.dart';
 
+import '../../_common/back_button/back_button.dart';
 import '../../navigation/app_drawer.dart';
 import '../bottom_sheet/place_info_bottom_sheet..dart';
-import '../interactive_map.dart';
+import '../map/area_of_interest.dart';
+import '../map/interactive_map.dart';
 import '../services/map_service.dart';
 import '../services/places_service.dart';
 
@@ -25,8 +26,6 @@ class GalleriesPage extends StatefulWidget {
 
 class _GalleriesPageState extends State<GalleriesPage>
     with TickerProviderStateMixin, WidgetsBindingObserver {
-  static const _bgColor = Color(0xffcccde1);
-  final _placeService = Get.find<PlacesService>();
   final GlobalKey _imageKey = GlobalKey();
   final _transformationController = TransformationController();
   late final InteractiveMap _map;
@@ -35,7 +34,7 @@ class _GalleriesPageState extends State<GalleriesPage>
   var _showBackArrow = false;
 
   Future<void> _initMap(BuildContext context, Size renderedSize) async {
-    _map = await MapService().getMap(
+    _map = await Get.find<MapService>().getMap(
       renderedSize,
       _imageKey,
       _transformationController,
@@ -54,8 +53,7 @@ class _GalleriesPageState extends State<GalleriesPage>
     await _map.tap(details);
     if (!_isInitial) {
       _showGuide = false;
-    }
-    if (_isInitial) {
+    } else {
       _showBackArrow = false;
     }
 
@@ -72,33 +70,17 @@ class _GalleriesPageState extends State<GalleriesPage>
           opacity: _isInitial ? 0 : 1,
           duration: const Duration(milliseconds: 300),
           child: _showBackArrow
-              ? IconButton(
-                  onPressed: () async {
-                    if (_isInitial) {
-                      return;
-                    }
-
-                    _isInitial = true;
-                    _showGuide = true;
-                    setState(() {});
-                    await _map.zoomOut();
-                    _showBackArrow = false;
-                    setState(() {});
-                  },
-                  icon: SvgPicture.asset('assets/icons/arrow-back.svg'),
-                )
+              ? AppBackButton(onPressed: _onBackButtonPressed)
               : null,
         ),
       ),
       drawer: const AppDrawer(),
-      backgroundColor: _bgColor,
+      backgroundColor: const Color(0xffcccde1),
       body: FutureBuilder(
           future: MapService().getImageSrc(widget.mapId),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return const Center(
-                child: Text('bruh'),
-              );
+              return Container();
             }
 
             return Stack(
@@ -137,37 +119,47 @@ class _GalleriesPageState extends State<GalleriesPage>
     );
   }
 
-  void _openBottomSheet(BuildContext context, AreaOfInterest area) {
-    if (area.placeId == null) {
-      return;
-    }
-
-    _placeService.getPlace(area.placeId!).then((place) {
-      showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        barrierColor: Colors.transparent,
-        builder: (BuildContext context) {
-          return PlaceInfoBottomSheet(place: place);
-        },
-      );
-    });
-  }
-
   void _onAreaTap(AreaOfInterest area) {
     if (area.isLeaf) {
-      _openBottomSheet(context, area);
+      _openBottomSheet(context, area as LeafAreaOfInterest);
       return;
     }
 
     _isInitial = !_map.isZoomed();
     if (_isInitial) {
       _showGuide = true;
-    }
-    if (!_isInitial) {
+    } else {
       _showBackArrow = true;
     }
 
+    setState(() {});
+  }
+
+  void _openBottomSheet(BuildContext context, LeafAreaOfInterest area) {
+    if (area.placeId == null) {
+      return;
+    }
+
+    Get.find<PlacesService>().getPlace(area.placeId).then((place) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        barrierColor: Colors.transparent,
+        builder: (BuildContext context) => PlaceInfoBottomSheet(place: place),
+      );
+    });
+  }
+
+  Future<void> _onBackButtonPressed() async {
+    if (_isInitial) {
+      return;
+    }
+
+    _isInitial = true;
+    _showGuide = true;
+    setState(() {});
+    await _map.zoomOut();
+    _showBackArrow = false;
     setState(() {});
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import 'package:grsu_guide/_common/back_button/back_button.dart';
 import 'package:grsu_guide/galleries/place.dart';
 import 'package:grsu_guide/galleries/services/places_service.dart';
 import 'package:grsu_guide/navigation/app_drawer.dart';
@@ -28,12 +28,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-          onPressed: () {
-            // TODO: remove hardcoded routing
-            Navigator.of(context).pushReplacementNamed('/galleries_map');
-          },
-          icon: SvgPicture.asset('assets/icons/arrow-back.svg'),
+        leading: AppBackButton(
+          onPressed: () =>
+              // TODO: remove hardcoded routing
+              Navigator.of(context).pushReplacementNamed('/galleries_map'),
         ),
       ),
       body: FutureBuilder(

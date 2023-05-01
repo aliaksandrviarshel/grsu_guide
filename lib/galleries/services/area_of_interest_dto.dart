@@ -1,9 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 
-import '../area_of_interest.dart';
+import 'package:grsu_guide/galleries/map/leaf_area_of_interest.dart';
+import 'package:grsu_guide/galleries/map/relative_area.dart';
+
+import '../map/area_of_interest.dart';
+import '../map/parent_area_of_interest.dart';
 
 class AreaOfInterestDto {
   int? placeId;
@@ -27,15 +30,26 @@ class AreaOfInterestDto {
     void Function(AreaOfInterest) onTapped,
     int? placeId,
   ) {
-    return AreaOfInterest.fromRect(
+    final relativeArea = RelativeArea.fromRect(
       _AreaOfInterestCoordinates(coordinates).getRect(),
       originalSize,
       renderedSize,
+    );
+    if (childAreas.isEmpty) {
+      return LeafAreaOfInterest.fromRect(
+        relativeArea,
+        imageKey,
+        onTapped,
+        placeId!,
+      );
+    }
+
+    return ParentAreaOfInterest.fromRect(
+      relativeArea,
       imageKey,
       transformationController,
       tickerProvider,
       onTapped,
-      placeId,
       childAreas
           .map((e) => e.toAreaOfInterest(
                 originalSize,

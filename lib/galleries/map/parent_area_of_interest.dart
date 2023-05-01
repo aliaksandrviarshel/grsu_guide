@@ -2,45 +2,38 @@ import 'package:flutter/widgets.dart';
 
 import 'package:collection/collection.dart';
 
-class AreaOfInterest {
-  final int? placeId;
-  final Rect _originalRect;
-  final Size _originalSize;
-  final Size _renderedSize;
-  final List<AreaOfInterest>? _childAreas;
+import 'package:grsu_guide/galleries/map/relative_area.dart';
+
+import 'area_of_interest.dart';
+
+class ParentAreaOfInterest implements AreaOfInterest {
+  final List<AreaOfInterest> _childAreas;
   final GlobalKey _imageKey;
   final TransformationController _transformationController;
   final TickerProvider _tickerProvider;
   late final AnimationController _animationController;
-  late final Rect _areaOfInterest;
   var _isZoomed = false;
   final _defaultScale = 1.7;
   final _targetScale = 3.0;
   final void Function(AreaOfInterest) onTapped;
 
+  final RelativeArea _relativeArea;
   late Matrix4Tween _tween;
 
-  bool get isLeaf => _childAreas?.isEmpty ?? true;
+  @override
+  bool get isLeaf => false;
 
-  AreaOfInterest.fromRect(
-    this._originalRect,
-    this._originalSize,
-    this._renderedSize,
+  ParentAreaOfInterest.fromRect(
+    this._relativeArea,
     this._imageKey,
     this._transformationController,
     this._tickerProvider,
     this.onTapped,
-    this.placeId, [
     this._childAreas,
-  ]) {
+  ) {
     _animationController = AnimationController(
       vsync: _tickerProvider,
       duration: const Duration(milliseconds: 300),
-    );
-    _areaOfInterest = _convertRect(
-      _originalRect,
-      _originalSize,
-      _renderedSize,
     );
 
     _animationController.addListener(
@@ -50,16 +43,13 @@ class AreaOfInterest {
     );
   }
 
+  @override
   dispose() {
     _animationController.dispose();
   }
 
+  @override
   Future<void> tap(TapUpDetails details) async {
-    if (_childAreas?.isEmpty ?? true) {
-      onTapped(this);
-      return;
-    }
-
     if (!_isZoomed) {
       onTapped(this);
       await _zoomIn();
@@ -67,7 +57,7 @@ class AreaOfInterest {
       return;
     }
 
-    final area = _childAreas?.firstWhereOrNull((x) => x.contains(details));
+    final area = _childAreas.firstWhereOrNull((x) => x.contains(details));
     if (area == null) {
       onTapped(this);
       _isZoomed = false;
@@ -79,14 +69,17 @@ class AreaOfInterest {
     return;
   }
 
+  @override
   bool contains(TapUpDetails details) {
     RenderBox box = _imageKey.currentContext!.findRenderObject() as RenderBox;
     Offset localPosition = box.globalToLocal(details.globalPosition);
-    return _areaOfInterest.contains(localPosition);
+    return _relativeArea.contains(localPosition);
   }
 
+  @override
   bool isZoomed() => _isZoomed;
 
+  @override
   Future<void> zoomOut() async {
     if (!_isZoomed) {
       return;
@@ -116,8 +109,8 @@ class AreaOfInterest {
 
   // TODO: fix zoom to a point
   Matrix4 _getZoomedMatrix() {
-    final x = -_areaOfInterest.left * (_targetScale - 1);
-    final y = -_areaOfInterest.center.dy * (_targetScale - 1);
+    final x = -_relativeArea.rect.left * (_targetScale - 1);
+    final y = -_relativeArea.rect.center.dy * (_targetScale - 1);
     final matrix = Matrix4.identity()
       ..translate(x, y)
       ..scale(_targetScale);
@@ -132,18 +125,5 @@ class AreaOfInterest {
       ..translate(x, y)
       ..scale(_defaultScale);
     return matrix;
-  }
-
-  Rect _convertRect(Rect originalRect, Size originalSize, Size renderedSize) {
-    final double ratioX = renderedSize.width / originalSize.width;
-    final double ratioY = renderedSize.height / originalSize.height;
-
-    final double renderedLeft = originalRect.left * ratioX;
-    final double renderedTop = originalRect.top * ratioY;
-    final double renderedRight = originalRect.right * ratioX;
-    final double renderedBottom = originalRect.bottom * ratioY;
-
-    return Rect.fromLTRB(
-        renderedLeft, renderedTop, renderedRight, renderedBottom);
   }
 }

@@ -1,16 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:grsu_guide/galleries/interactive_map.dart';
-
-import '../area_of_interest.dart';
-import '../place.dart';
+import '../map/area_of_interest.dart';
+import '../map/interactive_map.dart';
 
 import 'map_dto.dart';
-import 'place_entity.dart';
 
 class MapService {
   Future<String> getImageSrc(String mapId) {
