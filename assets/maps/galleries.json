@@ -5,7 +5,7 @@
             "shape": "rect",
             "childAreas": [
                 {
-                    "placeId": "0229095c-601e-4518-b09d-fcdcdebfd08d",
+                    "placeId": 1,
                     "coordinates": "143,1023,359,1202",
                     "shape": "rect",
                     "childAreas": []
@@ -17,7 +17,7 @@
             "shape": "rect",
             "childAreas": [
                 {
-                    "placeId": "101123cf-c2ef-42dc-801c-26c6e56999ac",
+                    "placeId": 2,
                     "coordinates": "1073,923,1334,1209",
                     "shape": "rect",
                     "childAreas": []
@@ -29,7 +29,7 @@
             "shape": "rect",
             "childAreas": [
                 {
-                    "placeId": "101123cf-c2ef-42dc-801c-26c6e56999ac",
+                    "placeId": 1,
                     "coordinates": "1073,923,1334,1209",
                     "shape": "rect",
                     "childAreas": []
@@ -41,7 +41,7 @@
             "shape": "rect",
             "childAreas": [
                 {
-                    "placeId": "101123cf-c2ef-42dc-801c-26c6e56999ac",
+                    "placeId": 1,
                     "coordinates": "1073,923,1334,1209",
                     "shape": "rect",
                     "childAreas": []
@@ -53,7 +53,7 @@
             "shape": "rect",
             "childAreas": [
                 {
-                    "placeId": "101123cf-c2ef-42dc-801c-26c6e56999ac",
+                    "placeId": 1,
                     "coordinates": "1073,923,1334,1209",
                     "shape": "rect",
                     "childAreas": []
@@ -65,7 +65,7 @@
             "shape": "rect",
             "childAreas": [
                 {
-                    "placeId": "101123cf-c2ef-42dc-801c-26c6e56999ac",
+                    "placeId": 1,
                     "coordinates": "1073,923,1334,1209",
                     "shape": "rect",
                     "childAreas": []
@@ -77,7 +77,7 @@
             "shape": "rect",
             "childAreas": [
                 {
-                    "placeId": "101123cf-c2ef-42dc-801c-26c6e56999ac",
+                    "placeId": 1,
                     "coordinates": "1073,923,1334,1209",
                     "shape": "rect",
                     "childAreas": []

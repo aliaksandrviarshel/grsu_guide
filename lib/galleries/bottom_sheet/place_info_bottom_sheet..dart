@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:grsu_guide/galleries/place.dart';
 
+import 'favorite_button.dart';
+
 // TODO: favorite places functionality (have to identificate places by id)
 class PlaceInfoBottomSheet extends StatefulWidget {
   final Place place;
@@ -73,9 +75,10 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
                             const SizedBox(height: 8),
                             Row(
                               children: [
-                                Image.asset(
-                                  key: _favoriteButtonKey,
-                                  'assets/icons/favorite_inactive.png',
+                                FavoriteButton(
+                                  imageKey: _favoriteButtonKey,
+                                  isFavorite: widget.place.isFavorite,
+                                  onTap: _onFavoriteButtonTap,
                                 ),
                                 const SizedBox(width: 8),
                                 const Text('Добавить в избранное')
@@ -99,6 +102,11 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
         ),
       ),
     );
+  }
+
+  Future<void> _onFavoriteButtonTap() async {
+    await widget.place.toggleFavorite();
+    setState(() {});
   }
 
   void _setMarkerPosition() {

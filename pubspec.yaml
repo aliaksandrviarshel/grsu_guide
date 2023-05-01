@@ -39,6 +39,8 @@ dependencies:
   flutter_svg: ^2.0.5
   get: ^4.6.5
   shared_preferences: ^2.1.0
+  sqflite: ^2.2.8
+  path: ^1.8.3
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +70,7 @@ flutter:
       - assets/images/galleries/
       - assets/images/vr_gallery/
       - assets/images/favorites/
+      - assets/icons/favorites/
       - assets/images/splash/
       - assets/maps/
       - assets/icons/

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import 'package:grsu_guide/_common/guide/tour_guide.dart';
 import 'package:grsu_guide/galleries/area_of_interest.dart';
@@ -9,6 +10,7 @@ import '../../navigation/app_drawer.dart';
 import '../bottom_sheet/place_info_bottom_sheet..dart';
 import '../interactive_map.dart';
 import '../services/map_service.dart';
+import '../services/places_service.dart';
 
 // TODO: change bottomsheet animation
 // TODO: get image with shadow
@@ -24,6 +26,7 @@ class GalleriesPage extends StatefulWidget {
 class _GalleriesPageState extends State<GalleriesPage>
     with TickerProviderStateMixin, WidgetsBindingObserver {
   static const _bgColor = Color(0xffcccde1);
+  final _placeService = Get.find<PlacesService>();
   final GlobalKey _imageKey = GlobalKey();
   final _transformationController = TransformationController();
   late final InteractiveMap _map;
@@ -139,7 +142,7 @@ class _GalleriesPageState extends State<GalleriesPage>
       return;
     }
 
-    MapService().getPlace(area.placeId!).then((place) {
+    _placeService.getPlace(area.placeId!).then((place) {
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,

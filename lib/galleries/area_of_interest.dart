@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:collection/collection.dart';
 
 class AreaOfInterest {
-  final String? placeId;
+  final int? placeId;
   final Rect _originalRect;
   final Size _originalSize;
   final Size _renderedSize;

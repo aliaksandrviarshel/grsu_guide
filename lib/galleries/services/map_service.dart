@@ -10,7 +10,7 @@ import '../area_of_interest.dart';
 import '../place.dart';
 
 import 'map_dto.dart';
-import 'place_dto.dart';
+import 'place_entity.dart';
 
 class MapService {
   Future<String> getImageSrc(String mapId) {
@@ -46,14 +46,6 @@ class MapService {
       transformationController,
       onTapped,
     );
-  }
-
-  Future<Place> getPlace(String placeId) async {
-    final jsonString = await rootBundle.loadString('assets/maps/places.json');
-    final places = json.decode(jsonString) as List<dynamic>;
-    final decodedPlaces = places.map((e) => PlaceDto.fromMap(e));
-    final place = decodedPlaces.firstWhere((e) => e.id == placeId);
-    return place.toPlace();
   }
 
   Future<Size> _getImageSize(String assetName) {

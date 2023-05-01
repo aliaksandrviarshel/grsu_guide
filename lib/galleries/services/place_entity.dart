@@ -1,18 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import '../place.dart';
-
-class PlaceDto {
-  String id;
+class PlaceEntity {
+  int id;
   String imageSrc;
   String name;
   String description;
+  int isFavorite;
 
-  PlaceDto({
+  PlaceEntity({
     required this.id,
     required this.imageSrc,
     required this.name,
     required this.description,
+    required this.isFavorite,
   });
 
   Map<String, dynamic> toMap() {
@@ -21,29 +22,22 @@ class PlaceDto {
       'imageSrc': imageSrc,
       'name': name,
       'description': description,
+      'isFavorite': isFavorite,
     };
   }
 
-  factory PlaceDto.fromMap(Map<String, dynamic> map) {
-    return PlaceDto(
-      id: map['id'] as String,
+  factory PlaceEntity.fromMap(Map<String, dynamic> map) {
+    return PlaceEntity(
+      id: map['id'] as int,
       imageSrc: map['imageSrc'] as String,
       name: map['name'] as String,
       description: map['description'] as String,
+      isFavorite: map['isFavorite'] as int,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PlaceDto.fromJson(String source) =>
-      PlaceDto.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  Place toPlace() {
-    return Place(
-      id: id,
-      imageSrc: imageSrc,
-      name: name,
-      description: description,
-    );
-  }
+  factory PlaceEntity.fromJson(String source) =>
+      PlaceEntity.fromMap(json.decode(source) as Map<String, dynamic>);
 }
