@@ -60,7 +60,7 @@ final _navItems = [
   ),
   NavigationItem(
     route: Routes.academicBuildings,
-    routeName: 'empty',
+    routeName: '/empty',
     name: 'Учебные корпуса и персоналии',
     smallIcon: Image.asset(
       'assets/icons/navigation/academic_buildings_small.png',
@@ -72,7 +72,7 @@ final _navItems = [
   ),
   NavigationItem(
     route: Routes.libraries,
-    routeName: 'empty',
+    routeName: '/empty',
     name: 'Библиотеки и читальные залы',
     smallIcon: Image.asset(
       'assets/icons/navigation/libraries_small.png',
@@ -96,7 +96,7 @@ final _navItems = [
   ),
   NavigationItem(
     route: Routes.cafes,
-    routeName: 'empty',
+    routeName: '/empty',
     name: 'Кафе / столовые',
     smallIcon: Image.asset(
       'assets/icons/navigation/cafes_small.png',
@@ -107,7 +107,7 @@ final _navItems = [
   ),
   NavigationItem(
     route: Routes.dormitories,
-    routeName: 'empty',
+    routeName: '/empty',
     name: 'Общежития',
     smallIcon: Image.asset(
       'assets/icons/navigation/dormitories_small.png',
@@ -118,7 +118,7 @@ final _navItems = [
   ),
   NavigationItem(
     route: Routes.architecture,
-    routeName: 'empty',
+    routeName: '/empty',
     name: 'Архитектура',
     smallIcon: Image.asset(
       'assets/icons/navigation/architecture_small.png',
@@ -129,7 +129,7 @@ final _navItems = [
   ),
   NavigationItem(
     route: Routes.leisure,
-    routeName: 'empty',
+    routeName: '/empty',
     name: 'Досуг',
     smallIcon: Image.asset(
       'assets/icons/navigation/leisure_small.png',
@@ -140,7 +140,7 @@ final _navItems = [
   ),
   NavigationItem(
     route: Routes.artStores,
-    routeName: 'empty',
+    routeName: '/empty',
     name: 'Арт-магазины и фотоателье',
     smallIcon: Image.asset(
       'assets/icons/navigation/art_stores_small.png',
@@ -167,7 +167,7 @@ final _navItems = [
   ),
   NavigationItem(
     route: Routes.settings,
-    routeName: 'empty',
+    routeName: '/empty',
     name: 'Настройки',
     smallIcon: Image.asset(
       'assets/icons/navigation/settings_small.png',

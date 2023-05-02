@@ -4,8 +4,11 @@ import 'package:grsu_guide/_common/guide/message.dart';
 
 class TourGuide extends StatelessWidget {
   final _guideImageRatio = 237 / 467;
+  final String _message;
 
-  const TourGuide({Key? key}) : super(key: key);
+  const TourGuide({Key? key, String message = 'Куда отправимся сегодня?'})
+      : _message = message,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class TourGuide extends StatelessWidget {
         Positioned(
           bottom: guideImageHeight / 3,
           right: guideImageWidth / 6 * 5,
-          child: const MessageBox(message: 'Куда отправимся сегодня?'),
+          child: MessageBox(message: _message),
         )
       ],
     );

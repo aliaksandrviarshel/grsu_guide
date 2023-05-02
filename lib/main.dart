@@ -9,6 +9,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:grsu_guide/galleries/services/places_service.dart';
+import 'package:grsu_guide/unfinished_page/unfinished_page.dart';
 import 'package:grsu_guide/virtual_gallery/screens/virtual_gallery_page.dart';
 import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_service.dart';
 
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
             const GalleriesPage(mapId: 'eb94f6b4-06ff-4dd3-9ec6-36f5a7baa2b9'),
         '/virtual_gallery': (context) => const VirtualGalleryPage(),
         '/favorites': (context) => const FavoritesPage(),
+        '/empty': (context) => const UnfinishedPage(),
       },
     );
   }
