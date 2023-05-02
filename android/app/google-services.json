@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "292424806545",
+    "project_id": "grsu-guide-a8394",
+    "storage_bucket": "grsu-guide-a8394.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292424806545:android:a912f43f8f0f5b3b59cf30",
+        "android_client_info": {
+          "package_name": "com.example.grsu_guide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292424806545-d9qvehv23k67nfos92k4751ss8i6fh2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU-iPNOyVWvLLqFkFaOurodY50eXDX67s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292424806545-d9qvehv23k67nfos92k4751ss8i6fh2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

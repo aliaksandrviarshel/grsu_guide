@@ -1,14 +1,13 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'picture_dto.dart';
 
 class VirtualGalleryService {
   Future<List<PictureDto>> getPictures() async {
-    final jsonString =
-        await rootBundle.loadString('assets/images/vr_gallery/pictures.json');
-    final List<dynamic> duh = json.decode(jsonString);
-    return duh.map((e) => PictureDto.fromMap(e)).toList();
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('vr_gallery').get();
+    return querySnapshot.docs
+        .map((e) => PictureDto.fromMap(e.data() as Map<String, dynamic>))
+        .toList();
   }
 }

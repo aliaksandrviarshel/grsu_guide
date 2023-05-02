@@ -1,11 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_service.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:get/get.dart';
 
 import '../../navigation/app_drawer.dart';
 import '../services/picture_dto.dart';
+import '../services/virtual_gallery_service.dart';
 
-// TODO: move assets to database
 class VirtualGalleryPage extends StatefulWidget {
   const VirtualGalleryPage({super.key});
 
@@ -14,59 +17,92 @@ class VirtualGalleryPage extends StatefulWidget {
 }
 
 class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
-  late List<PictureDto> _imageData;
-
+  final _connectivity = Connectivity();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const AppDrawer(),
       backgroundColor: const Color(0xffC8C8D0),
       body: FutureBuilder(
-          future: VirtualGalleryService().getPictures(),
+          future: _connectivity.checkConnectivity(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator());
             }
 
-            _imageData = snapshot.requireData;
-            return NestedScrollView(
-              body: SingleChildScrollView(
-                  child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Column(children: _getImages()),
-              )),
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return [
-                  const SliverAppBar(
-                    backgroundColor: Color(0xffC8C8D0),
-                    expandedHeight: 120,
-                    pinned: true,
-                    centerTitle: true,
-                    automaticallyImplyLeading: false,
-                    title: Text(
-                      'Виртуальная галерея',
-                      style: TextStyle(fontSize: 24, color: Colors.black),
-                    ),
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30),
-                        child: MyFlexibleAppBar(),
-                      ),
-                    ),
+            if (snapshot.requireData == ConnectivityResult.none) {
+              StreamSubscription? listener;
+              listener = _connectivity.onConnectivityChanged.listen((event) {
+                if (event != ConnectivityResult.none) {
+                  listener?.cancel();
+                  setState(() {});
+                }
+              });
+
+              return const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.signal_wifi_off, size: 64),
+                  Text(
+                    'Для доступа к виртуальной галерее нужно подключение к интернету',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 24),
                   ),
-                ];
-              },
-            );
+                ],
+              );
+            }
+
+            return FutureBuilder(
+                future: Get.find<VirtualGalleryService>().getPictures(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  return VirtualGalleryListView(pictures: snapshot.requireData);
+                });
           }),
     );
   }
+}
 
-  List<Widget> _getImages() {
-    return _imageData
-        .map((e) => Picture(
-              picture: e,
-            ))
-        .toList();
+class VirtualGalleryListView extends StatelessWidget {
+  final List<PictureDto> _pictures;
+
+  const VirtualGalleryListView({super.key, required List<PictureDto> pictures})
+      : _pictures = pictures;
+
+  @override
+  Widget build(BuildContext context) {
+    return NestedScrollView(
+      body: SingleChildScrollView(
+          child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
+            children: _pictures.map((e) => Picture(picture: e)).toList()),
+      )),
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return [
+          const SliverAppBar(
+            backgroundColor: Color(0xffC8C8D0),
+            expandedHeight: 120,
+            pinned: true,
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            title: Text(
+              'Виртуальная галерея',
+              style: TextStyle(fontSize: 24, color: Colors.black),
+            ),
+            flexibleSpace: FlexibleSpaceBar(
+              background: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: MyFlexibleAppBar(),
+              ),
+            ),
+          ),
+        ];
+      },
+    );
   }
 }
 
@@ -85,7 +121,7 @@ class Picture extends StatelessWidget {
             return Dialog(
               insetPadding: EdgeInsets.zero,
               backgroundColor: Colors.transparent,
-              child: Image.asset(picture.asset),
+              child: Image.network(picture.asset),
             );
           },
         );
@@ -101,7 +137,7 @@ class Picture extends StatelessWidget {
                     widthFactor: 1,
                     child: SizedBox(
                       height: 190,
-                      child: Image.asset(
+                      child: Image.network(
                         picture.asset,
                         fit: BoxFit.fitWidth,
                       ),
