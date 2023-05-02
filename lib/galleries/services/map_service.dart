@@ -9,8 +9,11 @@ import '../map/interactive_map.dart';
 import 'map_dto.dart';
 
 class MapService {
-  Future<String> getImageSrc(String mapId) {
-    return Future.sync(() => 'assets/images/galleries/map.png');
+  Future<String> getImageSrc(String mapId) async {
+    final jsonString =
+        await rootBundle.loadString('assets/maps/galleries.json');
+    var mapDto = MapDto.fromJson(jsonString);
+    return mapDto.imageSrc;
   }
 
   Future<InteractiveMap> getMap(
@@ -29,7 +32,7 @@ class MapService {
     final jsonString =
         await rootBundle.loadString('assets/maps/galleries.json');
     var mapDto = MapDto.fromJson(jsonString);
-    final originalSize = await _getImageSize('assets/images/galleries/map.png');
+    final originalSize = await _getImageSize(mapDto.imageSrc);
     final areas = mapDto.areas
         .map((e) => e.toAreaOfInterest(
               originalSize,

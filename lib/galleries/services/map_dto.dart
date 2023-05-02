@@ -3,26 +3,29 @@ import 'dart:convert';
 import 'area_of_interest_dto.dart';
 
 class MapDto {
+  String imageSrc;
   List<AreaOfInterestDto> areas;
 
   MapDto({
     required this.areas,
+    required this.imageSrc,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'imageSrc': imageSrc,
       'areas': areas.map((x) => x.toMap()).toList(),
     };
   }
 
   factory MapDto.fromMap(Map<String, dynamic> map) {
-    var list = List<AreaOfInterestDto>.from(
-      (map['areas'] as List<dynamic>).map<AreaOfInterestDto>(
-        (x) => AreaOfInterestDto.fromMap(x as Map<String, dynamic>),
-      ),
-    );
     return MapDto(
-      areas: list,
+      imageSrc: map['imageSrc'] as String,
+      areas: List<AreaOfInterestDto>.from(
+        (map['areas'] as List<dynamic>).map<AreaOfInterestDto>(
+          (x) => AreaOfInterestDto.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 

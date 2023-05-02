@@ -117,7 +117,6 @@ class ParentAreaOfInterest implements AreaOfInterest {
     double smallX = getXOffset();
     final x = _relativeArea.rect.center.dx - smallX;
     final y = _relativeArea.rect.center.dy;
-    print([smallX]);
     final matrix = Matrix4.identity()
       ..translate(x, y)
       ..scale(_targetScale)
