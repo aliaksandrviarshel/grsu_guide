@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.grsu_guide">
     <application
-        android:label="grsu_guide"
+        android:label="NavC"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
