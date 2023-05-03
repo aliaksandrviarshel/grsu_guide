@@ -1,9 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
-
-import 'package:grsu_guide/settings/services/settings_service.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/about_developers_item.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/language_item.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/learning_item.dart';
@@ -18,19 +15,7 @@ class SettingsPage extends StatefulWidget {
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
-// class SettingsItem {
-//   final String title;
-//   final void Function() onTap;
-
-//   SettingsItem({
-//     required this.title,
-//     required this.onTap,
-//   });
-// }
-
 class _SettingsPageState extends State<SettingsPage> {
-  final _settingsService = SettingsService();
-
   List<Widget> get items => [
         const ForLeftHandedItem(),
         const AboutDevelopersItem(),
@@ -50,62 +35,30 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Positioned(
-                  left: -12,
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        size: 32,
-                      )),
-                ),
-                const Text(
-                  'Настройки',
-                  style: TextStyle(fontSize: 24),
-                )
+                IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/galleries_map');
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      size: 32,
+                    )),
+                const Text('Настройки', style: TextStyle(fontSize: 24))
               ],
             ),
           ),
         ),
         const SizedBox(height: 26),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            children: _getItems(),
-          ),
-        )
+        Column(children: _getItems())
       ]),
     );
   }
 
   List<Widget> _getItems() {
-    return items.map((e) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // InkWell(
-          //   onTap: e.onTap,
-          //   child: Container(
-          //     height: 60,
-          //     alignment: Alignment.centerLeft,
-          //     decoration: const BoxDecoration(
-          //         color: Color(0xffD9D9D9),
-          //         borderRadius: BorderRadius.all(Radius.circular(24))),
-          //     child: Padding(
-          //       padding: const EdgeInsets.only(left: 14.0),
-          //       child: Text(
-          //         e.title.toUpperCase(),
-          //         style: const TextStyle(fontSize: 24),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          e,
-          const SizedBox(height: 18)
-        ],
-      );
-    }).toList();
+    return items
+        .map((e) => Container(
+            margin: const EdgeInsets.only(bottom: 18, left: 30, right: 30),
+            child: e))
+        .toList();
   }
 }

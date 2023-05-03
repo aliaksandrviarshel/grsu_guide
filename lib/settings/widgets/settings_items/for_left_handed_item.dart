@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
-
 import 'package:grsu_guide/settings/services/settings_service.dart';
 
 import '../settings_item_content.dart';
@@ -25,15 +23,12 @@ class _ForLeftHandedItemState extends State<ForLeftHandedItem> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        _settingsService.toggleForLeftHanded().then(
-          (value) {
-            _setTitle(value);
-          },
-        );
+    return SettingsItemContent(
+      title: _title,
+      onTap: () async {
+        final title = await _settingsService.toggleForLeftHanded();
+        _setTitle(title);
       },
-      child: SettingsItemContent(title: _title),
     );
   }
 

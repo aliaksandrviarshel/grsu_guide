@@ -12,11 +12,11 @@ class LanguageItem extends StatefulWidget {
 class _LanguageItemState extends State<LanguageItem> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return SettingsItemContent(
+      title: 'Язык',
       onTap: () async {
         print('object');
       },
-      child: const SettingsItemContent(title: 'Язык'),
     );
   }
 }

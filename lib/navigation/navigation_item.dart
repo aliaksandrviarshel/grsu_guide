@@ -167,7 +167,7 @@ final _navItems = [
   ),
   NavigationItem(
     route: Routes.settings,
-    routeName: '/empty',
+    routeName: '/settings',
     name: 'Настройки',
     smallIcon: Image.asset(
       'assets/icons/navigation/settings_small.png',

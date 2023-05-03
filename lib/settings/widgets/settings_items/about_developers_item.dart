@@ -12,7 +12,8 @@ class AboutDevelopersItem extends StatefulWidget {
 class _AboutDevelopersItemState extends State<AboutDevelopersItem> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return SettingsItemContent(
+      title: 'О разработчиках',
       onTap: () async {
         showDialog(
           context: context,
@@ -21,7 +22,6 @@ class _AboutDevelopersItemState extends State<AboutDevelopersItem> {
           },
         );
       },
-      child: const SettingsItemContent(title: 'О разработчиках'),
     );
   }
 }

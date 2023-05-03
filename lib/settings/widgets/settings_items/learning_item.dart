@@ -12,11 +12,11 @@ class LearningItem extends StatefulWidget {
 class _LearningItemState extends State<LearningItem> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return SettingsItemContent(
+      title: 'Обучение',
       onTap: () async {
         print('object');
       },
-      child: const SettingsItemContent(title: 'Обучение'),
     );
   }
 }

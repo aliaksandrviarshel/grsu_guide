@@ -12,11 +12,11 @@ class ThemeItem extends StatefulWidget {
 class _ThemeItemState extends State<ThemeItem> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return SettingsItemContent(
+      title: 'Тема',
       onTap: () async {
         print('object');
       },
-      child: const SettingsItemContent(title: 'Тема'),
     );
   }
 }

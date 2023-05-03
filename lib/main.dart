@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
+import 'package:grsu_guide/settings/screens/settings_page.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
             const GalleriesPage(mapId: 'eb94f6b4-06ff-4dd3-9ec6-36f5a7baa2b9'),
         '/virtual_gallery': (context) => const VirtualGalleryPage(),
         '/favorites': (context) => const FavoritesPage(),
+        '/settings': (context) => const SettingsPage(),
         '/empty': (context) => const UnfinishedPage(),
       },
     );
