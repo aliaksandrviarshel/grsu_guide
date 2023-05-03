@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:grsu_guide/navigation/navigation_item.dart';
 
+import 'petal_sizer.dart';
 import 'rotated_petal.dart';
 import 'rotated_petal_controller.dart';
 
@@ -13,9 +14,6 @@ class NavWheel extends StatefulWidget {
 }
 
 class _NavWheelState extends State<NavWheel> with TickerProviderStateMixin {
-  double get _petalHeight => MediaQuery.of(context).size.width * .7;
-  double get _petalWidth => _petalHeight * _petalAspectRatio;
-  double get _petalAspectRatio => 150 / 250;
   final _petalsController = RotatedPetalsController();
   final _navItems = [
     NavigationItem.fromRoute(Routes.galleriesMap),
@@ -38,7 +36,7 @@ class _NavWheelState extends State<NavWheel> with TickerProviderStateMixin {
     final shiftList =
         _shiftList(List.generate(11, (index) => index), 4 - indexOffset);
     return Transform.translate(
-      offset: Offset(-_petalWidth / 2, 124),
+      offset: Offset(-PetalSizer(context: context).size.width / 2, 124),
       child: Stack(
         children: [
           for (var i in shiftList)

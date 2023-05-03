@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:grsu_guide/navigation/petal_painter.dart';
 
+import 'petal_sizer.dart';
+
 class NavPetal extends StatefulWidget {
   final String title;
   final Widget icon;
@@ -23,13 +25,12 @@ class NavPetal extends StatefulWidget {
 class _NavPetalState extends State<NavPetal> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    double petalHeight = MediaQuery.of(context).size.width * .7;
-    double screenWidth = MediaQuery.of(context).size.width;
-    double aspectRatio = 150 / 250;
+    var petalSize = PetalSizer(context: context).size;
+    var screenSize = MediaQuery.of(context).size;
 
     return SizedBox(
-      width: petalHeight * aspectRatio,
-      height: petalHeight + 20,
+      width: petalSize.width,
+      height: petalSize.height + 20,
       child: CustomPaint(
         painter: MyPainter(
           color: widget.isTransparent
@@ -39,17 +40,17 @@ class _NavPetalState extends State<NavPetal> with TickerProviderStateMixin {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: OverflowBox(
-            maxHeight: screenWidth * .9,
+            maxHeight: screenSize.width * .9,
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
                 Positioned(
-                  bottom: widget.isTransparent ? 0 : 50,
+                  bottom: widget.isTransparent ? 0 : screenSize.height * .2,
                   top: widget.isTransparent ? 170 : null,
                   child: SizedBox(
                     height: widget.isTransparent
-                        ? screenWidth * .6
-                        : petalHeight * .7,
+                        ? screenSize.width * .6
+                        : petalSize.height * .7,
                     child: RotatedBox(
                       quarterTurns: 3,
                       child: Text(
