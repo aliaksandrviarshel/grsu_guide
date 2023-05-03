@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:grsu_guide/settings/services/settings_service.dart';
+import 'package:get/get.dart';
+
+import 'package:grsu_guide/settings/app_settings.dart';
 
 import '../settings_item_content.dart';
 
@@ -12,7 +14,7 @@ class ForLeftHandedItem extends StatefulWidget {
 }
 
 class _ForLeftHandedItemState extends State<ForLeftHandedItem> {
-  final _settingsService = SettingsService();
+  final _settingsService = Get.find<AppSettings>();
   late String _title;
 
   @override

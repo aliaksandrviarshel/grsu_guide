@@ -5,11 +5,11 @@ import 'package:flutter/services.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-import 'package:grsu_guide/settings/screens/settings_page.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:grsu_guide/galleries/services/places_service.dart';
+import 'package:grsu_guide/settings/screens/settings_page.dart';
 import 'package:grsu_guide/unfinished_page/unfinished_page.dart';
 import 'package:grsu_guide/virtual_gallery/screens/virtual_gallery_page.dart';
 import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_service.dart';
@@ -17,6 +17,7 @@ import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_service.dart
 import 'favorites/favorites_page.dart';
 import 'galleries/screens/galleries_page.dart';
 import 'galleries/services/map_service.dart';
+import 'settings/app_settings.dart';
 import 'splash/splash_screen.dart';
 
 late Database database;
@@ -55,6 +56,7 @@ void main() async {
   Get.put(MapService());
   Get.put(PlacesService());
   Get.put(VirtualGalleryService());
+  Get.put(AppSettings());
 }
 
 class MyApp extends StatelessWidget {
