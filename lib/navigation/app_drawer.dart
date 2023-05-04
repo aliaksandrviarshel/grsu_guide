@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'nav_wheel.dart';
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
+  final NavWheelAlignment alignment;
+
+  const AppDrawer({super.key, this.alignment = NavWheelAlignment.left});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class AppDrawer extends StatelessWidget {
       height: double.infinity,
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 7.5, sigmaY: 7.5),
-        child: const NavWheel(),
+        child: NavWheel(alignment: alignment),
       ),
     );
   }

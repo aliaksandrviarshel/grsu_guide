@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:grsu_guide/navigation/petal_painter.dart';
+import 'package:grsu_guide/navigation/nav_wheel.dart';
+import 'package:grsu_guide/navigation/petal/petal_painter.dart';
 
 import 'petal_sizer.dart';
 
@@ -9,6 +10,7 @@ class NavPetal extends StatefulWidget {
   final Widget icon;
   final bool isTransparent;
   final Widget largeIcon;
+  final NavWheelAlignment alignment;
 
   const NavPetal({
     Key? key,
@@ -16,6 +18,7 @@ class NavPetal extends StatefulWidget {
     required this.icon,
     required this.largeIcon,
     required this.isTransparent,
+    this.alignment = NavWheelAlignment.left,
   }) : super(key: key);
 
   @override
@@ -25,8 +28,9 @@ class NavPetal extends StatefulWidget {
 class _NavPetalState extends State<NavPetal> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    var petalSize = PetalSizer(context: context).size;
-    var screenSize = MediaQuery.of(context).size;
+    final petalSize = PetalSizer(context: context).size;
+    final screenSize = MediaQuery.of(context).size;
+    final quarterTurns = widget.alignment == NavWheelAlignment.left ? 3 : 1;
 
     return SizedBox(
       width: petalSize.width,
@@ -45,16 +49,20 @@ class _NavPetalState extends State<NavPetal> with TickerProviderStateMixin {
               alignment: Alignment.bottomCenter,
               children: [
                 Positioned(
-                  bottom: widget.isTransparent ? 0 : screenSize.height * .2,
+                  bottom: widget.isTransparent ? 0 : screenSize.height * .05,
                   top: widget.isTransparent ? 170 : null,
                   child: SizedBox(
                     height: widget.isTransparent
                         ? screenSize.width * .6
                         : petalSize.height * .7,
                     child: RotatedBox(
-                      quarterTurns: 3,
+                      quarterTurns: quarterTurns,
                       child: Text(
-                        textAlign: widget.isTransparent ? TextAlign.end : null,
+                        textAlign: widget.isTransparent
+                            ? widget.alignment == NavWheelAlignment.left
+                                ? TextAlign.end
+                                : TextAlign.start
+                            : null,
                         widget.title,
                         style: const TextStyle(
                           color: Colors.white,
@@ -72,14 +80,15 @@ class _NavPetalState extends State<NavPetal> with TickerProviderStateMixin {
                     child: widget.isTransparent
                         ? RotatedBox(
                             key: const ValueKey(1),
-                            quarterTurns: 3,
+                            quarterTurns: quarterTurns,
                             child: SizedBox(
                               width: 170,
                               height: 170,
                               child: widget.largeIcon,
                             ),
                           )
-                        : RotatedBox(quarterTurns: 3, child: widget.icon),
+                        : RotatedBox(
+                            quarterTurns: quarterTurns, child: widget.icon),
                   ),
                 )
               ],

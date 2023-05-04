@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:get/get.dart';
 
-import '../../navigation/app_drawer.dart';
+import '../../navigation/app_drawer_factory.dart';
 import '../services/picture_dto.dart';
 import '../services/virtual_gallery_service.dart';
 
@@ -21,7 +21,8 @@ class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const AppDrawer(),
+      drawer: Get.find<AppDrawerFactory>().drawer(),
+      endDrawer: Get.find<AppDrawerFactory>().endDrawer(),
       backgroundColor: const Color(0xffC8C8D0),
       body: FutureBuilder(
           future: _connectivity.checkConnectivity(),

@@ -17,6 +17,7 @@ import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_service.dart
 import 'favorites/favorites_page.dart';
 import 'galleries/screens/galleries_page.dart';
 import 'galleries/services/map_service.dart';
+import 'navigation/app_drawer_factory.dart';
 import 'settings/app_settings.dart';
 import 'splash/splash_screen.dart';
 
@@ -57,6 +58,9 @@ void main() async {
   Get.put(PlacesService());
   Get.put(VirtualGalleryService());
   Get.put(AppSettings());
+  Get.put(AppDrawerFactory());
+
+  Get.find<AppSettings>().init();
 }
 
 class MyApp extends StatelessWidget {

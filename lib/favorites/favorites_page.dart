@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:grsu_guide/_common/back_button/back_button.dart';
 import 'package:grsu_guide/galleries/place.dart';
 import 'package:grsu_guide/galleries/services/places_service.dart';
-import 'package:grsu_guide/navigation/app_drawer.dart';
 
 import '../_common/guide/tour_guide_full_height.dart';
+import '../navigation/app_drawer_factory.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
@@ -24,7 +24,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffD6DAF0),
-      drawer: const AppDrawer(),
+      drawer: Get.find<AppDrawerFactory>().drawer(),
+      endDrawer: Get.find<AppDrawerFactory>().endDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,

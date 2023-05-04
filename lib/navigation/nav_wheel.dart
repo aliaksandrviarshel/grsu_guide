@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:grsu_guide/navigation/navigation_item.dart';
+import 'package:grsu_guide/navigation/petal/rotation_handler/left_rotation_handler.dart';
+import 'package:grsu_guide/navigation/petal/rotation_handler/rotation_handler.dart';
 
-import 'petal_sizer.dart';
-import 'rotated_petal.dart';
-import 'rotated_petal_controller.dart';
+import 'petal/petal_sizer.dart';
+import 'petal/rotated_petal.dart';
+import 'petal/rotated_petal_controller.dart';
+import 'petal/rotation_handler/right_rotation_handler.dart';
+
+enum NavWheelAlignment { left, right }
 
 class NavWheel extends StatefulWidget {
-  const NavWheel({super.key});
+  final NavWheelAlignment alignment;
+
+  const NavWheel({super.key, this.alignment = NavWheelAlignment.left});
 
   @override
   State<NavWheel> createState() => _NavWheelState();
@@ -31,19 +38,18 @@ class _NavWheelState extends State<NavWheel> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final indexOffset =
-        _navItems.indexWhere((element) => element.isCurrent(context));
-    final shiftList =
-        _shiftList(List.generate(11, (index) => index), 4 - indexOffset);
+    final shiftedIndexes = _getShiftedIndexes(context);
+    final screenWidth = MediaQuery.of(context).size.width;
     return Transform.translate(
-      offset: Offset(-PetalSizer(context: context).size.width / 2, 124),
+      offset: _getOffset(screenWidth, context),
       child: Stack(
         children: [
-          for (var i in shiftList)
+          for (var index in shiftedIndexes)
             RotatedPetal(
-              index: i,
-              navigationItem: _navItems[i],
-              displayIndex: _getDisplayIndex(shiftList, i),
+              index: index,
+              navigationItem: _navItems[index],
+              rotationHandler: _createRotationHandler(
+                  _getDisplayIndex(shiftedIndexes, index)),
               controller: _petalsController,
               onTap: _onPetalTap,
             )
@@ -52,34 +58,62 @@ class _NavWheelState extends State<NavWheel> with TickerProviderStateMixin {
     );
   }
 
-  void _onPetalTap(int index, int displayIndex, NavigationItem navigationItem) {
-    if (displayIndex < 2) {
-      _petalsController.previous();
-      setState(() {});
+  List<int> _getShiftedIndexes(BuildContext context) {
+    final indexOffset = _navItems.indexWhere((e) => e.isCurrent(context));
+    if (widget.alignment == NavWheelAlignment.left) {
+      return List.generate(11, (index) => index).shift(4 - indexOffset);
+    }
+
+    return List.generate(11, (index) => index).shift(4 - indexOffset + 6);
+  }
+
+  Offset _getOffset(double screenWidth, BuildContext context) {
+    if (widget.alignment == NavWheelAlignment.left) {
+      return Offset(-PetalSizer(context: context).size.width / 2, 124);
+    }
+
+    return Offset(
+      (screenWidth + PetalSizer(context: context).size.width) / 2 - 8,
+      124,
+    );
+  }
+
+  void _onPetalTap(
+    RotatedPetalState petalState,
+    NavigationItem navigationItem,
+  ) {
+    if (petalState.isCurrent()) {
+      navigationItem.navigate(context);
       return;
     }
 
-    if (displayIndex > 2) {
-      _petalsController.next();
-      setState(() {});
-      return;
-    }
+    petalState.isPrevious()
+        ? _petalsController.previous()
+        : _petalsController.next();
 
-    navigationItem.navigate(context);
+    setState(() {});
   }
 
   int _getDisplayIndex(List<int> list, int i) {
-    return _shiftList(list, -2)[i];
+    return list.shift(-2)[i];
   }
 
-  List<int> _shiftList(List<int> list, int k) {
-    final n = list.length;
+  RotationHandler _createRotationHandler(int petalDisplayIndex) {
+    return widget.alignment == NavWheelAlignment.left
+        ? LeftRotationHandler(displayIndex: petalDisplayIndex)
+        : RightRotationHandler(displayIndex: petalDisplayIndex);
+  }
+}
+
+extension ListExtension<T> on List<T> {
+  List<T> shift(int k) {
+    final n = length;
     final shift = k % n;
-    if (shift == 0) return list;
+    if (shift == 0) return this;
     if (shift < 0) {
-      return [...list.sublist(n + shift), ...list.sublist(0, n + shift)];
+      return [...sublist(n + shift), ...sublist(0, n + shift)];
     } else {
-      return [...list.sublist(shift), ...list.sublist(0, shift)];
+      return [...sublist(shift), ...sublist(0, shift)];
     }
   }
 }

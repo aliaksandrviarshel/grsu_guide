@@ -1,53 +1,51 @@
 import 'package:flutter/material.dart';
 
+import 'package:grsu_guide/navigation/nav_wheel.dart';
 import 'package:grsu_guide/navigation/navigation_item.dart';
+import 'package:grsu_guide/navigation/petal/rotation_handler/left_rotation_handler.dart';
 
 import 'nav_petal.dart';
 import 'rotated_petal_controller.dart';
+import 'rotation_handler/rotation_handler.dart';
 
 class RotatedPetal extends StatefulWidget {
+  final int index;
+  final NavigationItem navigationItem;
+  final RotationHandler rotationHandler;
+  final RotatedPetalsController controller;
+  final void Function(
+    RotatedPetalState petalState,
+    NavigationItem navigationItem,
+  ) onTap;
+
   const RotatedPetal({
     super.key,
     required this.index,
-    required this.displayIndex,
+    required this.rotationHandler,
     required this.onTap,
     required this.controller,
     required this.navigationItem,
   });
-
-  final int index;
-  final NavigationItem navigationItem;
-  final int displayIndex;
-  final RotatedPetalsController controller;
-  final void Function(
-    int index,
-    int displayIndex,
-    NavigationItem navigationItem,
-  ) onTap;
 
   @override
   State<RotatedPetal> createState() => RotatedPetalState();
 }
 
 class RotatedPetalState extends State<RotatedPetal> {
-  final _turn = 1 / 12;
-  late double _turns;
-  late int _displayIndex;
-  var _offset = 0;
+  late final RotationHandler _handler;
 
   @override
   void initState() {
     super.initState();
     widget.controller.attach(this);
-    _initTurns();
-    _displayIndex = widget.displayIndex;
+    _handler = widget.rotationHandler;
   }
 
   @override
   Widget build(BuildContext context) {
     double petalHeight = MediaQuery.of(context).size.width * .7;
     return AnimatedRotation(
-      turns: _turns,
+      turns: _handler.turns,
       duration: const Duration(milliseconds: 300),
       alignment: Alignment.bottomCenter,
       child: Transform.translate(
@@ -56,18 +54,20 @@ class RotatedPetalState extends State<RotatedPetal> {
           height: petalHeight,
           child: GestureDetector(
             onTap: () => widget.onTap(
-              widget.index,
-              _displayIndex,
+              this,
               widget.navigationItem,
             ),
             child: NavPetal(
-              isTransparent: _displayIndex == 2,
+              isTransparent: isCurrent(),
               title: widget.navigationItem.name,
               icon: SizedBox(
                 width: 30,
                 child: widget.navigationItem.smallIcon,
               ),
               largeIcon: widget.navigationItem.largeIcon,
+              alignment: _handler is LeftRotationHandler
+                  ? NavWheelAlignment.left
+                  : NavWheelAlignment.right,
             ),
           ),
         ),
@@ -75,49 +75,13 @@ class RotatedPetalState extends State<RotatedPetal> {
     );
   }
 
-  void _initTurns() {
-    if (widget.displayIndex == 0 || widget.displayIndex == 1) {
-      _turns = _turn * (widget.displayIndex + .5);
-      return;
-    }
+  bool isCurrent() => _handler.isCurrent();
 
-    if (widget.displayIndex == 2) {
-      _turns = _turn * 3;
-      return;
-    }
+  bool isPrevious() => _handler.isPrevious();
 
-    _turns = _turn * (widget.displayIndex + 1.5);
-  }
+  bool isNext() => _handler.isNext();
 
-  void previous() {
-    _offset++;
-    _changeDisplayedIndex();
-    if (_displayIndex == 2 || _displayIndex == 3) {
-      _turns += _turn * 1.5;
-      return;
-    }
+  void previous() => _handler.previous();
 
-    _turns += _turn;
-  }
-
-  void next() {
-    _offset--;
-    _changeDisplayedIndex();
-    if (_displayIndex == 1 || _displayIndex == 2) {
-      _turns -= _turn * 1.5;
-      return;
-    }
-
-    _turns -= _turn;
-  }
-
-  void _changeDisplayedIndex() {
-    const length = 11;
-    int index = (widget.displayIndex + _offset) % length;
-    if (index < 0) {
-      index += length;
-    }
-
-    _displayIndex = index;
-  }
+  void next() => _handler.next();
 }

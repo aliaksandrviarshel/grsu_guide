@@ -6,7 +6,7 @@ import 'package:grsu_guide/_common/guide/tour_guide.dart';
 import 'package:grsu_guide/galleries/map/leaf_area_of_interest.dart';
 
 import '../../_common/back_button/back_button.dart';
-import '../../navigation/app_drawer.dart';
+import '../../navigation/app_drawer_factory.dart';
 import '../bottom_sheet/place_info_bottom_sheet..dart';
 import '../map/area_of_interest.dart';
 import '../map/interactive_map.dart';
@@ -67,6 +67,7 @@ class _GalleriesPageState extends State<GalleriesPage>
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
+        actions: <Widget>[Container()],
         leading: AnimatedOpacity(
           opacity: _isInitial ? 0 : 1,
           duration: const Duration(milliseconds: 300),
@@ -75,7 +76,8 @@ class _GalleriesPageState extends State<GalleriesPage>
               : null,
         ),
       ),
-      drawer: const AppDrawer(),
+      drawer: Get.find<AppDrawerFactory>().drawer(),
+      endDrawer: Get.find<AppDrawerFactory>().endDrawer(),
       backgroundColor: const Color(0xffcccde1),
       body: FutureBuilder(
           future: MapService().getImageSrc(widget.mapId),
