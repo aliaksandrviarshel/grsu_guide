@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+import 'package:grsu_guide/galleries/place.dart';
+
 import 'area_of_interest.dart';
 import 'relative_area.dart';
 
@@ -21,7 +23,9 @@ class LeafAreaOfInterest implements AreaOfInterest {
   );
 
   @override
-  dispose() {}
+  dispose() {
+    // empty implementation
+  }
 
   @override
   Future<void> tap(TapUpDetails details) async {
@@ -39,23 +43,15 @@ class LeafAreaOfInterest implements AreaOfInterest {
   bool isZoomed() => false;
 
   @override
-  Future<void> zoomOut() async {}
+  Future<void> zoomOut() async {
+    // empty implementation
+  }
 
-  // TODO: remove function duplication in areas of interest
-  Rect _convertRect(Rect originalRect, Size originalSize, Size renderedSize) {
-    final double ratioX = renderedSize.width / originalSize.width;
-    final double ratioY = renderedSize.height / originalSize.height;
+  @override
+  bool has(Place place) => place.id == placeId;
 
-    final double renderedLeft = originalRect.left * ratioX;
-    final double renderedTop = originalRect.top * ratioY;
-    final double renderedRight = originalRect.right * ratioX;
-    final double renderedBottom = originalRect.bottom * ratioY;
-
-    return Rect.fromLTRB(
-      renderedLeft,
-      renderedTop,
-      renderedRight,
-      renderedBottom,
-    );
+  @override
+  Future<void> imitateTap(Place place) async {
+    onTapped(this);
   }
 }

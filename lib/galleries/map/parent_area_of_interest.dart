@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:collection/collection.dart';
 
 import 'package:grsu_guide/galleries/map/relative_area.dart';
+import 'package:grsu_guide/galleries/place.dart';
 
 import 'area_of_interest.dart';
 import 'interactive_map.dart';
@@ -59,14 +60,12 @@ class ParentAreaOfInterest implements AreaOfInterest {
 
       onTapped(this);
       await _zoomIn();
-      _isZoomed = true;
       return;
     }
 
     final area = _childAreas.firstWhereOrNull((x) => x.contains(details));
     if (area == null) {
       onTapped(this);
-      _isZoomed = false;
       await _zoomDefault();
       return;
     }
@@ -86,31 +85,45 @@ class ParentAreaOfInterest implements AreaOfInterest {
   bool isZoomed() => _isZoomed;
 
   @override
-  Future<void> zoomOut() async {
-    if (!_isZoomed) {
-      return;
-    }
-
-    await _zoomDefault();
-    _isZoomed = false;
+  bool has(Place place) {
+    final area = _childAreas.firstWhereOrNull((element) => element.has(place));
+    return area != null;
   }
 
-  Future<void> _zoomIn() {
+  @override
+  Future<void> imitateTap(Place place) async {
+    final area = _childAreas.firstWhereOrNull((element) => element.has(place));
+    if (area != null) {
+      await _zoomIn();
+      area.imitateTap(place);
+    }
+  }
+
+  @override
+  Future<void> zoomOut() async {
+    if (_isZoomed) {
+      await _zoomDefault();
+    }
+  }
+
+  Future<void> _zoomIn() async {
     _tween = Matrix4Tween(
       begin: _transformationController.value,
       end: _getZoomedMatrix(),
     );
     _animationController.reset();
-    return _animationController.forward();
+    await _animationController.forward();
+    _isZoomed = true;
   }
 
-  Future<void> _zoomDefault() {
+  Future<void> _zoomDefault() async {
     _tween = Matrix4Tween(
       begin: _transformationController.value,
       end: _getDefaultMatrix(),
     );
     _animationController.reset();
-    return _animationController.forward();
+    await _animationController.forward();
+    _isZoomed = false;
   }
 
   Matrix4 _getZoomedMatrix() {

@@ -8,8 +8,11 @@ class FilledFavoritesPageContent extends StatefulWidget {
   final List<Place> places;
   final void Function() onLastPlaceRemoved;
 
-  const FilledFavoritesPageContent(
-      {super.key, required this.places, required this.onLastPlaceRemoved});
+  const FilledFavoritesPageContent({
+    super.key,
+    required this.places,
+    required this.onLastPlaceRemoved,
+  });
 
   @override
   State<FilledFavoritesPageContent> createState() =>
@@ -100,6 +103,9 @@ class _FavoritePlacesListState extends State<_FavoritePlacesList> {
               }
             });
           },
+          onTap: (place) {
+            place.navigateToMap(context);
+          },
         );
       },
     );
@@ -109,8 +115,13 @@ class _FavoritePlacesListState extends State<_FavoritePlacesList> {
 class _PlaceCard extends StatefulWidget {
   final Place place;
   final void Function(Place place) onDismissed;
+  final void Function(Place place) onTap;
 
-  const _PlaceCard({required this.place, required this.onDismissed});
+  const _PlaceCard({
+    required this.place,
+    required this.onDismissed,
+    required this.onTap,
+  });
 
   @override
   State<_PlaceCard> createState() => _PlaceCardState();
@@ -135,50 +146,53 @@ class _PlaceCardState extends State<_PlaceCard> {
             width: 30,
           ),
         ),
-        child: Container(
-          decoration: const BoxDecoration(color: Colors.transparent),
+        child: GestureDetector(
+          onTap: () => widget.onTap(widget.place),
           child: Container(
-            height: 88,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(24),
-                    topLeft: Radius.circular(24),
-                  ),
-                  child: Stack(
-                    children: [
-                      Image.asset(
-                        width: 88,
-                        fit: BoxFit.fitWidth,
-                        widget.place.imageSrc,
-                      ),
-                      Container(
-                        height: 88,
-                        width: 88,
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [
-                              Colors.transparent,
-                              Colors.white,
-                            ],
-                          ),
+            decoration: const BoxDecoration(color: Colors.transparent),
+            child: Container(
+              height: 88,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(24),
+                      topLeft: Radius.circular(24),
+                    ),
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          width: 88,
+                          fit: BoxFit.fitWidth,
+                          widget.place.imageSrc,
                         ),
-                      )
-                    ],
+                        Container(
+                          height: 88,
+                          width: 88,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Colors.transparent,
+                                Colors.white,
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Text(
-                  widget.place.name,
-                  style: const TextStyle(fontSize: 16),
-                ),
-              ],
+                  Text(
+                    widget.place.name,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
             ),
           ),
         ));

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 
 import 'package:grsu_guide/galleries/services/place_entity.dart';
@@ -36,5 +38,13 @@ class Place {
 
   Future<void> removeFromFavorites() async {
     await _placesService.removeFromFavorites(id);
+  }
+
+  Future<void> navigateToMap(BuildContext context) async {
+    // TODO: change logic when a new map will be added
+    await Navigator.of(context).pushReplacementNamed(
+      '/galleries_map',
+      arguments: this,
+    );
   }
 }

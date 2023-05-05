@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:collection/collection.dart';
 
 import 'package:grsu_guide/galleries/map/parent_area_of_interest.dart';
+import 'package:grsu_guide/galleries/place.dart';
 
 import 'area_of_interest.dart';
 
@@ -53,5 +54,12 @@ class InteractiveMap {
   ParentAreaOfInterest? getCurrentArea() {
     return _areas.firstWhereOrNull((element) => element.isZoomed())
         as ParentAreaOfInterest?;
+  }
+
+  Future<void> zoomToAndTap(Place place) async {
+    final area = _areas.firstWhereOrNull((element) => element.has(place));
+    if (area != null) {
+      await area.imitateTap(place);
+    }
   }
 }

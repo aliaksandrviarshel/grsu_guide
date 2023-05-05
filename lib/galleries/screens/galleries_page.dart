@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:grsu_guide/_common/guide/tour_guide.dart';
 import 'package:grsu_guide/galleries/map/leaf_area_of_interest.dart';
+import 'package:grsu_guide/galleries/place.dart';
 
 import '../../_common/back_button/back_button.dart';
 import '../../navigation/app_drawer_factory.dart';
@@ -33,32 +34,10 @@ class _GalleriesPageState extends State<GalleriesPage>
   var _showGuide = true;
   var _showBackArrow = false;
 
-  Future<void> _initMap(BuildContext context, Size renderedSize) async {
-    _map = await Get.find<MapService>().getMap(
-      renderedSize,
-      _imageKey,
-      _transformationController,
-      this,
-      _onAreaTap,
-    );
-    _map!.init();
-  }
-
   @override
   void dispose() {
     _map?.dispose();
     super.dispose();
-  }
-
-  Future<void> _onTapUp(TapUpDetails details) async {
-    await _map!.tap(details);
-    if (!_isInitial) {
-      _showGuide = false;
-    } else {
-      _showBackArrow = false;
-    }
-
-    setState(() {});
   }
 
   @override
@@ -102,7 +81,7 @@ class _GalleriesPageState extends State<GalleriesPage>
                         _initMap(
                           context,
                           Size(constraints.maxWidth, constraints.maxHeight),
-                        );
+                        ).then((_) => _zoomToInitialPlace(context));
                       }
 
                       return Image.asset(
@@ -121,6 +100,43 @@ class _GalleriesPageState extends State<GalleriesPage>
             );
           }),
     );
+  }
+
+  Future<void> _zoomToInitialPlace(BuildContext context) async {
+    final place = ModalRoute.of(context)?.settings.arguments as Place?;
+    if (place != null) {
+      await _map!.zoomToAndTap(place);
+      _isInitial = _map!.isZoomed();
+      if (_isInitial) {
+        _showGuide = true;
+      } else {
+        _showBackArrow = true;
+      }
+
+      setState(() {});
+    }
+  }
+
+  Future<void> _initMap(BuildContext context, Size renderedSize) async {
+    _map = await Get.find<MapService>().getMap(
+      renderedSize,
+      _imageKey,
+      _transformationController,
+      this,
+      _onAreaTap,
+    );
+    _map!.init();
+  }
+
+  Future<void> _onTapUp(TapUpDetails details) async {
+    await _map!.tap(details);
+    if (!_isInitial) {
+      _showGuide = false;
+    } else {
+      _showBackArrow = false;
+    }
+
+    setState(() {});
   }
 
   void _onAreaTap(AreaOfInterest area) {
