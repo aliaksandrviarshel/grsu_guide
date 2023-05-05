@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:grsu_guide/settings/widgets/settings_items/about_developers_item.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/language_item.dart';
-import 'package:grsu_guide/settings/widgets/settings_items/learning_item.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/theme_item.dart';
 
 import '../widgets/settings_items/for_left_handed_item.dart';
@@ -21,7 +20,6 @@ class _SettingsPageState extends State<SettingsPage> {
         const AboutDevelopersItem(),
         const LanguageItem(),
         const ThemeItem(),
-        const LearningItem(),
       ];
 
   @override
