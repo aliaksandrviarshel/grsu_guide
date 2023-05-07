@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../main.dart';
+import '../theme/app_themes.dart';
 
 import 'app_settings_repository.dart';
 

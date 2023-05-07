@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../main.dart';
+import '../theme/app_themes.dart';
 
 class AppSettingsRepository {
   final _isForLeftHandedKey = 'is_for_left_handed';

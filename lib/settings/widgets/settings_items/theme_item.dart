@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import 'package:grsu_guide/main.dart';
 import 'package:grsu_guide/settings/app_settings.dart';
 
+import '../../../theme/app_themes.dart';
 import '../settings_item_content.dart';
 
 class ThemeItem extends StatefulWidget {
