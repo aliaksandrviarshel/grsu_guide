@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -21,8 +22,8 @@ class _ForLeftHandedItemState extends State<ForLeftHandedItem> {
   Widget build(BuildContext context) {
     return SettingsItemContent(
       title: Provider.of<AppSettings>(context).isForLeftHanded
-          ? 'Для леворучек'
-          : 'Для праворучек',
+          ? AppLocalizations.of(context)!.forLefties
+          : AppLocalizations.of(context)!.forRighties,
       onTap: _settingsService.toggleForLeftHanded,
     );
   }

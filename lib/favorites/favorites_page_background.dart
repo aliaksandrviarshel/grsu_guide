@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../_common/guide/tour_guide_full_height.dart';
 
 class FavoritesPageBackground extends StatelessWidget {
@@ -17,13 +19,14 @@ class FavoritesPageBackground extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Избранное',
+              Text(
+                  AppLocalizations.of(context)!.favorites,
                   style: TextStyle(
                     fontSize: 24,
                     color: Theme.of(context).colorScheme.onBackground,
                   )),
               Text(
-                'Места, в которые хочется вернуться',
+                  AppLocalizations.of(context)!.placesYouWantToReturnTo,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.onBackground,
                 ),

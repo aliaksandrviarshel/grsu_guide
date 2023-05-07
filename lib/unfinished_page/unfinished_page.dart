@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import 'package:grsu_guide/_common/guide/tour_guide.dart';
@@ -14,10 +15,12 @@ class UnfinishedPage extends StatelessWidget {
     return Scaffold(
       drawer: Get.find<AppDrawerFactory>().drawer(),
       endDrawer: Get.find<AppDrawerFactory>().endDrawer(),
-      body: const Stack(
+      body: Stack(
         children: [
-          Center(child: Icon(Icons.construction, size: 64)),
-          TourGuide(message: 'Мы работаем над этой страницей'),
+          const Center(child: Icon(Icons.construction, size: 64)),
+          TourGuide(
+            message: AppLocalizations.of(context)!.weAreWorkingOnThisPage,
+          ),
         ],
       ),
     );

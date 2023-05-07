@@ -22,22 +22,24 @@ class NavWheel extends StatefulWidget {
 
 class _NavWheelState extends State<NavWheel> with TickerProviderStateMixin {
   final _petalsController = RotatedPetalsController();
-  final _navItems = [
-    NavigationItem.fromRoute(Routes.galleriesMap),
-    NavigationItem.fromRoute(Routes.academicBuildings),
-    NavigationItem.fromRoute(Routes.libraries),
-    NavigationItem.fromRoute(Routes.favorites),
-    NavigationItem.fromRoute(Routes.cafes),
-    NavigationItem.fromRoute(Routes.dormitories),
-    NavigationItem.fromRoute(Routes.architecture),
-    NavigationItem.fromRoute(Routes.leisure),
-    NavigationItem.fromRoute(Routes.artStores),
-    NavigationItem.fromRoute(Routes.virtualGallery),
-    NavigationItem.fromRoute(Routes.settings),
-  ];
+  late List<NavigationItem> _navItems;
 
   @override
   Widget build(BuildContext context) {
+    _navItems = [
+      NavigationItem.fromRoute(Routes.galleriesMap, context),
+      NavigationItem.fromRoute(Routes.academicBuildings, context),
+      NavigationItem.fromRoute(Routes.libraries, context),
+      NavigationItem.fromRoute(Routes.favorites, context),
+      NavigationItem.fromRoute(Routes.cafes, context),
+      NavigationItem.fromRoute(Routes.dormitories, context),
+      NavigationItem.fromRoute(Routes.architecture, context),
+      NavigationItem.fromRoute(Routes.leisure, context),
+      NavigationItem.fromRoute(Routes.artStores, context),
+      NavigationItem.fromRoute(Routes.virtualGallery, context),
+      NavigationItem.fromRoute(Routes.settings, context),
+    ];
+
     final shiftedIndexes = _getShiftedIndexes(context);
     final screenWidth = MediaQuery.of(context).size.width;
     return Transform.translate(

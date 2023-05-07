@@ -13,9 +13,13 @@ class AppSettings extends ChangeNotifier {
   late ThemeData _currentTheme;
   ThemeData get currentTheme => _currentTheme;
 
+  late Locale _currentLocale;
+  Locale get currentLocale => _currentLocale;
+
   Future<void> init() async {
     _isForLeftHanded = await _appSettingsRepository.getIsForLeftHanded();
     _currentTheme = await _appSettingsRepository.getTheme();
+    _currentLocale = await _appSettingsRepository.getLocale();
   }
 
   Future<void> toggleForLeftHanded() async {
@@ -29,6 +33,16 @@ class AppSettings extends ChangeNotifier {
         _currentTheme == AppThemes.light ? AppThemes.dark : AppThemes.light;
     _appSettingsRepository.setTheme(newTheme);
     _currentTheme = newTheme;
+    notifyListeners();
+  }
+
+  Future<void> toggleLanguage() async {
+    final targetLocale = _currentLocale.languageCode == 'en'
+        ? const Locale('ru')
+        : const Locale('en');
+
+    await _appSettingsRepository.setLocale(targetLocale);
+    _currentLocale = targetLocale;
     notifyListeners();
   }
 }

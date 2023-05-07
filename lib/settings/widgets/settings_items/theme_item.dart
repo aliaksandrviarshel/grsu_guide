@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -22,8 +23,8 @@ class _ThemeItemState extends State<ThemeItem> {
   Widget build(BuildContext context) {
     return SettingsItemContent(
       title: Provider.of<AppSettings>(context).currentTheme == AppThemes.light
-          ? 'Светлая тема'
-          : 'Темная тема',
+          ? AppLocalizations.of(context)!.lightTheme
+          : AppLocalizations.of(context)!.darkTheme,
       onTap: _settings.toggleTheme,
     );
   }

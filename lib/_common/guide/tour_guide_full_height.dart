@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'message.dart';
 
 class TourGuideFullHeight extends StatelessWidget {
@@ -25,8 +27,10 @@ class TourGuideFullHeight extends StatelessWidget {
           Positioned(
             top: guideHeight * .19,
             right: guideWidth - 24,
-            child: const MessageBox(
-                message: 'У  тебя нет любимых мест? Давай это исправим!'),
+            child: MessageBox(
+              message:
+                  AppLocalizations.of(context)!.dontYouHaveAnyFavoritePlaces,
+            ),
           )
         ],
       );

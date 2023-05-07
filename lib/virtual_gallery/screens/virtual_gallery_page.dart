@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import '../../navigation/app_drawer_factory.dart';
@@ -39,14 +40,15 @@ class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
                 }
               });
 
-              return const Column(
+              return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.signal_wifi_off, size: 64),
+                  const Icon(Icons.signal_wifi_off, size: 64),
                   Text(
-                    'Для доступа к виртуальной галерее нужно подключение к интернету',
+                    AppLocalizations.of(context)!
+                        .toAccessThisPageYouNeedAnInternetConnection,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24),
+                    style: const TextStyle(fontSize: 24),
                   ),
                 ],
               );
@@ -90,7 +92,7 @@ class VirtualGalleryListView extends StatelessWidget {
             centerTitle: true,
             automaticallyImplyLeading: false,
             title: Text(
-              'Виртуальная галерея',
+              AppLocalizations.of(context)!.virtualGallery,
               style: TextStyle(
                   fontSize: 24,
                   color: Theme.of(context).colorScheme.onBackground),
@@ -168,14 +170,14 @@ class Picture extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Автор: ${picture.author}',
+                    '${AppLocalizations.of(context)!.author}: ${picture.author}',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 12,
                     ),
                   ),
                   Text(
-                    'Картина: "${picture.title}"',
+                    '${AppLocalizations.of(context)!.painting}: "${picture.title}"',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -214,7 +216,7 @@ class MyFlexibleAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(
-            'Витуальная галерея - описание Не следует, однако забывать, что реализация намеченных плановых заданий позволяет оценить значение модели развития. Товарищи!',
+            AppLocalizations.of(context)!.virtualGalleryDescription,
             style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 12,

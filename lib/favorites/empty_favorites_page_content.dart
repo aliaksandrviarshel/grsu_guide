@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'favorites_page_background.dart';
 
 class EmptyFavoritesPageContent extends StatelessWidget {
@@ -81,9 +83,9 @@ class _AddPlaceButton extends StatelessWidget {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
         ),
       ),
-      child: const Text(
-        'Добавить место',
-        style: TextStyle(
+      child: Text(
+        AppLocalizations.of(context)!.addPlace,
+        style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
         ),

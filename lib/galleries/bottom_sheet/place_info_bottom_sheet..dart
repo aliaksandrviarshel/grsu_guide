@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:grsu_guide/galleries/place.dart';
 
 import 'favorite_button.dart';
@@ -86,7 +88,8 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  'Добавить в избранное',
+                                  
+                                  AppLocalizations.of(context)!.addToFavorites,
                                   style: TextStyle(
                                     color: colorScheme.onBackground,
                                   ),
