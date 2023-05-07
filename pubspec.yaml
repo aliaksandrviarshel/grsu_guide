@@ -77,6 +77,15 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  fonts:
+    - family: Mont
+      fonts:
+        - asset: assets/fonts/Mont-Regular.ttf
+        - asset: assets/fonts/Mont-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Mont-Bold.ttf
+          weight: 900
+
   assets:
       - assets/images/
       - assets/images/guide_woman/
@@ -87,3 +96,4 @@ flutter:
       - assets/maps/
       - assets/icons/
       - assets/icons/navigation/
+      - assets/fonts/

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AppThemes {
+  static const _fontFamily = 'Mont';
+
   static final light = ThemeData(
+    fontFamily: _fontFamily,
     scaffoldBackgroundColor: const Color(0xffD6DAF0),
     colorScheme: const ColorScheme.dark().copyWith(
       background: const Color(0xffE9E4F9),
@@ -16,6 +19,7 @@ class AppThemes {
   );
 
   static final dark = ThemeData(
+    fontFamily: _fontFamily,
     colorScheme: const ColorScheme.dark().copyWith(
       background: const Color(0xff2f1a75),
       onBackground: Colors.white,
