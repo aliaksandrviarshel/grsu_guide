@@ -23,7 +23,7 @@ class AppSettings extends ChangeNotifier {
   }
 
   Future<void> toggleForLeftHanded() async {
-    await _appSettingsRepository.setIsForLeftHanded(isForLeftHanded);
+    await _appSettingsRepository.updateIsForLeftHanded(isForLeftHanded);
     _isForLeftHanded = !_isForLeftHanded;
     notifyListeners();
   }
@@ -31,7 +31,7 @@ class AppSettings extends ChangeNotifier {
   Future<void> toggleTheme() async {
     final newTheme =
         _currentTheme == AppThemes.light ? AppThemes.dark : AppThemes.light;
-    _appSettingsRepository.setTheme(newTheme);
+    _appSettingsRepository.updateTheme(newTheme);
     _currentTheme = newTheme;
     notifyListeners();
   }
@@ -41,7 +41,7 @@ class AppSettings extends ChangeNotifier {
         ? const Locale('ru')
         : const Locale('en');
 
-    await _appSettingsRepository.setLocale(targetLocale);
+    await _appSettingsRepository.updateLocale(targetLocale);
     _currentLocale = targetLocale;
     notifyListeners();
   }

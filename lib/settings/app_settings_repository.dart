@@ -14,7 +14,7 @@ class AppSettingsRepository {
     return prefs.getBool(_isForLeftHandedKey) ?? false;
   }
 
-  Future<void> setIsForLeftHanded(bool value) async {
+  Future<void> updateIsForLeftHanded(bool value) async {
     var prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_isForLeftHandedKey, !value);
   }
@@ -26,7 +26,7 @@ class AppSettingsRepository {
         : AppThemes.dark;
   }
 
-  Future<void> setTheme(ThemeData theme) async {
+  Future<void> updateTheme(ThemeData theme) async {
     var prefs = await SharedPreferences.getInstance();
     final newTheme = theme == AppThemes.light ? 'light' : 'dark';
     await prefs.setString(_themeKey, newTheme);
@@ -39,7 +39,7 @@ class AppSettingsRepository {
         : const Locale('en');
   }
 
-  Future<void> setLocale(Locale targetLocale) async {
+  Future<void> updateLocale(Locale targetLocale) async {
     var prefs = await SharedPreferences.getInstance();
     final newLocale = targetLocale.languageCode == 'en' ? 'en' : 'ru';
     await prefs.setString(_localeKey, newLocale);
