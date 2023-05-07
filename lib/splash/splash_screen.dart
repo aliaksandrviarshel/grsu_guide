@@ -22,7 +22,6 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     return Scaffold(
-      backgroundColor: const Color(0xffD6DAF0),
       body: Stack(
         children: [
           AnimatedPadding(

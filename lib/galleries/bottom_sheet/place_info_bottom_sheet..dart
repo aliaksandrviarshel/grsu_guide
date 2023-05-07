@@ -29,10 +29,11 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
       _setMarkerPosition();
     });
     final place = widget.place;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return SingleChildScrollView(
       child: Container(
-        color: const Color(0xffcccde1),
+        color: Theme.of(context).scaffoldBackgroundColor,
         height: MediaQuery.of(context).size.height * .9,
         child: Stack(
           children: [
@@ -59,7 +60,7 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
                       ),
                     ),
                     Container(
-                      color: const Color(0xffE9E4F9),
+                      color: Theme.of(context).colorScheme.background,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 44),
                         child: Column(
@@ -69,7 +70,10 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
                               alignment: Alignment.bottomRight,
                               child: Text(
                                 place.name,
-                                style: const TextStyle(fontSize: 24),
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: colorScheme.onBackground,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -81,11 +85,19 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
                                   onTap: _onFavoriteButtonTap,
                                 ),
                                 const SizedBox(width: 8),
-                                const Text('Добавить в избранное')
+                                Text(
+                                  'Добавить в избранное',
+                                  style: TextStyle(
+                                    color: colorScheme.onBackground,
+                                  ),
+                                )
                               ],
                             ),
                             const SizedBox(height: 8),
-                            Text(place.description)
+                            Text(
+                              place.description,
+                              style: TextStyle(color: colorScheme.onBackground),
+                            )
                           ],
                         ),
                       ),

@@ -8,11 +8,11 @@ class AppDrawerFactory {
   final _settings = Get.find<AppSettings>();
 
   AppDrawer? drawer() {
-    return _settings.isForLeftHanded.value ? null : const AppDrawer();
+    return _settings.isForLeftHanded ? null : const AppDrawer();
   }
 
   AppDrawer? endDrawer() {
-    return _settings.isForLeftHanded.value
+    return _settings.isForLeftHanded
         ? const AppDrawer(alignment: NavWheelAlignment.right)
         : null;
   }

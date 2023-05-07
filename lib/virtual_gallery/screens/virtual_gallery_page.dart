@@ -23,7 +23,6 @@ class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
     return Scaffold(
       drawer: Get.find<AppDrawerFactory>().drawer(),
       endDrawer: Get.find<AppDrawerFactory>().endDrawer(),
-      backgroundColor: const Color(0xffC8C8D0),
       body: FutureBuilder(
           future: _connectivity.checkConnectivity(),
           builder: (context, snapshot) {
@@ -84,17 +83,19 @@ class VirtualGalleryListView extends StatelessWidget {
       )),
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
-          const SliverAppBar(
-            backgroundColor: Color(0xffC8C8D0),
+          SliverAppBar(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             expandedHeight: 120,
             pinned: true,
             centerTitle: true,
             automaticallyImplyLeading: false,
             title: Text(
               'Виртуальная галерея',
-              style: TextStyle(fontSize: 24, color: Colors.black),
+              style: TextStyle(
+                  fontSize: 24,
+                  color: Theme.of(context).colorScheme.onBackground),
             ),
-            flexibleSpace: FlexibleSpaceBar(
+            flexibleSpace: const FlexibleSpaceBar(
               background: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: MyFlexibleAppBar(),
@@ -209,14 +210,17 @@ class MyFlexibleAppBar extends StatelessWidget {
 
     return SizedBox(
       height: statusBarHeight + appBarHeight,
-      child: const Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(
             'Витуальная галерея - описание Не следует, однако забывать, что реализация намеченных плановых заданий позволяет оценить значение модели развития. Товарищи!',
-            style: TextStyle(fontFamily: 'Poppins', fontSize: 12),
+            style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 12,
+                color: Theme.of(context).colorScheme.onBackground),
           ),
-          SizedBox(height: 24)
+          const SizedBox(height: 24)
         ],
       ),
     );

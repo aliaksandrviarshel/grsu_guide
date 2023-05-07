@@ -18,7 +18,7 @@ class SettingsItemContent extends StatelessWidget {
         height: 60,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-          color: const Color(0xffD9D9D9),
+          color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(24),
         ),
         child: Padding(

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:grsu_guide/galleries/services/places_service.dart';
@@ -26,8 +27,14 @@ late Database database;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
-
+  final settings = Get.put(AppSettings());
+  await settings.init();
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => settings,
+      child: const MyApp(),
+    ),
+  );
   // final databasePath = await getDatabasesPath();
   // await databaseFactory.deleteDatabase('$databasePath/grsu_guide_database.db');
   database = await openDatabase(
@@ -57,7 +64,6 @@ void main() async {
   Get.put(MapService());
   Get.put(PlacesService());
   Get.put(VirtualGalleryService());
-  Get.put(AppSettings());
   Get.put(AppDrawerFactory());
 
   Get.find<AppSettings>().init();
@@ -69,11 +75,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        drawerTheme: const DrawerThemeData(
-          scrimColor: Color.fromRGBO(202, 208, 232, 0.32),
-        ),
-      ),
+      theme: Provider.of<AppSettings>(context).currentTheme,
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
@@ -86,4 +88,31 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+class AppThemes {
+  static final light = ThemeData(
+    scaffoldBackgroundColor: const Color(0xffD6DAF0),
+    colorScheme: const ColorScheme.dark().copyWith(
+      background: const Color(0xffE9E4F9),
+      onBackground: const Color(0xff676767),
+      primary: const Color(0xffBFC1E9),
+      secondary: Colors.white,
+      onSecondary: const Color(0xff676767),
+    ),
+    drawerTheme: const DrawerThemeData(
+      scrimColor: Color.fromRGBO(202, 208, 232, 0.32),
+    ),
+  );
+
+  static final dark = ThemeData(
+    colorScheme: const ColorScheme.dark().copyWith(
+      background: const Color(0xff2f1a75),
+      onBackground: Colors.white,
+      primary: const Color(0xff20235e),
+      secondary: Colors.white,
+      onSecondary: const Color(0xff676767),
+    ),
+    scaffoldBackgroundColor: const Color(0xff242e63),
+  );
 }

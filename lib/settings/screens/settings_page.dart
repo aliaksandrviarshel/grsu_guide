@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import 'package:grsu_guide/_common/back_button/back_button.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/about_developers_item.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/language_item.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/theme_item.dart';
@@ -33,15 +34,14 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed('/galleries_map');
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      size: 32,
-                    )),
-                const Text('Настройки', style: TextStyle(fontSize: 24))
+                AppBackButton(onPressed: () {
+                  Navigator.of(context).pushNamed('/galleries_map');
+                }),
+                const Text('Настройки',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                    ))
               ],
             ),
           ),

@@ -9,6 +9,8 @@ class EmptyFavoritesPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).colorScheme.primary;
+
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -24,14 +26,15 @@ class EmptyFavoritesPageContent extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    const Color(0xffBFC1E9).withOpacity(0),
-                    const Color(0xffBFC1E9),
-                    const Color(0xffBFC1E9),
-                    const Color(0xffBFC1E9),
+                    primaryColor.withOpacity(0),
+                    primaryColor,
+                    primaryColor,
+                    primaryColor,
                   ]),
-              image: const DecorationImage(
+              image: DecorationImage(
                 alignment: Alignment.topCenter,
-                image: AssetImage(
+                colorFilter: ColorFilter.mode(primaryColor, BlendMode.srcATop),
+                image: const AssetImage(
                   'assets/images/favorites/menu_swipe.png',
                 ),
                 fit: BoxFit.fitWidth,

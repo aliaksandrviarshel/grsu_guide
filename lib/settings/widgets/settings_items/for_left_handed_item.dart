@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import 'package:grsu_guide/settings/app_settings.dart';
 
@@ -15,27 +16,14 @@ class ForLeftHandedItem extends StatefulWidget {
 
 class _ForLeftHandedItemState extends State<ForLeftHandedItem> {
   final _settingsService = Get.find<AppSettings>();
-  late String _title;
-
-  @override
-  void initState() {
-    super.initState();
-    _setTitle(_settingsService.isForLeftHanded.value);
-  }
 
   @override
   Widget build(BuildContext context) {
     return SettingsItemContent(
-      title: _title,
-      onTap: () async {
-        final title = await _settingsService.toggleForLeftHanded();
-        _setTitle(title);
-      },
+      title: Provider.of<AppSettings>(context).isForLeftHanded
+          ? 'Для леворучек'
+          : 'Для праворучек',
+      onTap: _settingsService.toggleForLeftHanded,
     );
-  }
-
-  void _setTitle(bool isForLeftHanded) {
-    _title = isForLeftHanded ? 'Для леворучек' : 'Для праворучек';
-    setState(() {});
   }
 }

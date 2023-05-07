@@ -31,6 +31,8 @@ class _FilledFavoritesPageContentState
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).colorScheme.primary;
+
     return Stack(
       children: [
         const FavoritesPageBackground(isGuideVisible: false),
@@ -42,14 +44,15 @@ class _FilledFavoritesPageContentState
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    const Color(0xffBFC1E9).withOpacity(0),
-                    const Color(0xffBFC1E9),
-                    const Color(0xffBFC1E9),
-                    const Color(0xffBFC1E9),
+                    primaryColor.withOpacity(0),
+                    primaryColor,
+                    primaryColor,
+                    primaryColor,
                   ]),
-              image: const DecorationImage(
+              image: DecorationImage(
                 alignment: Alignment.topCenter,
-                image: AssetImage(
+                colorFilter: ColorFilter.mode(primaryColor, BlendMode.srcATop),
+                image: const AssetImage(
                   'assets/images/favorites/menu_swipe.png',
                 ),
                 fit: BoxFit.fitWidth,
@@ -138,7 +141,7 @@ class _PlaceCardState extends State<_PlaceCard> {
           padding: const EdgeInsets.all(12),
           alignment: Alignment.centerRight,
           decoration: BoxDecoration(
-            color: const Color(0xffD5D8F0),
+            color: Theme.of(context).colorScheme.background,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Image.asset(
@@ -153,7 +156,7 @@ class _PlaceCardState extends State<_PlaceCard> {
             child: Container(
               height: 88,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.secondary,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Row(
@@ -189,7 +192,9 @@ class _PlaceCardState extends State<_PlaceCard> {
                   ),
                   Text(
                     widget.place.name,
-                    style: const TextStyle(fontSize: 16),
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.onSecondary),
                   ),
                 ],
               ),

@@ -57,7 +57,6 @@ class _GalleriesPageState extends State<GalleriesPage>
       ),
       drawer: Get.find<AppDrawerFactory>().drawer(),
       endDrawer: Get.find<AppDrawerFactory>().endDrawer(),
-      backgroundColor: const Color(0xffcccde1),
       body: FutureBuilder(
           future: MapService().getImageSrc(widget.mapId),
           builder: (context, snapshot) {

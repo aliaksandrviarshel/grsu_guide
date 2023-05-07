@@ -12,7 +12,6 @@ class UnfinishedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffCCCDE1),
       drawer: Get.find<AppDrawerFactory>().drawer(),
       endDrawer: Get.find<AppDrawerFactory>().endDrawer(),
       body: const Stack(

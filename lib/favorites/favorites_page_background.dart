@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import '../_common/guide/tour_guide_full_height.dart';
 
@@ -12,16 +12,22 @@ class FavoritesPageBackground extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text('Избранное',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  )),
               Text(
-                'Избранное',
-                style: TextStyle(fontSize: 24),
-              ),
-              Text('Места, в которые хочется вернуться')
+                'Места, в которые хочется вернуться',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+              )
             ],
           ),
         ),

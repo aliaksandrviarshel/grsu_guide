@@ -8,12 +8,20 @@ class MessageBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      Image.asset('assets/images/guide_woman/message.png'),
+      Image.asset(
+        'assets/images/guide_woman/message.png',
+        color: Theme.of(context).colorScheme.secondary,
+      ),
       Positioned.fill(
         child: Align(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Text(message),
+            child: Text(
+              message,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+            ),
           ),
         ),
       ),

@@ -23,7 +23,6 @@ class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffD6DAF0),
       drawer: Get.find<AppDrawerFactory>().drawer(),
       endDrawer: Get.find<AppDrawerFactory>().endDrawer(),
       appBar: AppBar(
