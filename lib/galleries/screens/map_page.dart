@@ -16,7 +16,6 @@ import '../map/interactive_map.dart';
 import '../services/map_service.dart';
 import '../services/places_service.dart';
 
-// TODO: change bottomsheet animation
 // TODO: get image with shadow
 class MapPage extends StatefulWidget {
   final String mapId;

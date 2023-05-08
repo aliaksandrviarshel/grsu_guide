@@ -8,7 +8,6 @@ import '../../_common/dotted_progress_indicator/dotted_progress_indicator.dart';
 
 import 'favorite_button.dart';
 
-// TODO: favorite places functionality (have to identificate places by id)
 class PlaceInfoBottomSheet extends StatefulWidget {
   final Place place;
 

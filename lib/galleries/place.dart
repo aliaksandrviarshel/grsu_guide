@@ -44,7 +44,6 @@ class Place {
   }
 
   Future<void> navigateToMap(BuildContext context) async {
-    // TODO: change logic when a new map will be added
     print(mapId);
     await Navigator.of(context).pushReplacementNamed(
       '/$mapId',
