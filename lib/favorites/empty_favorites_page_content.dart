@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:grsu_guide/navigation/navigation_item.dart';
+
 import 'favorites_page_background.dart';
 
 class EmptyFavoritesPageContent extends StatelessWidget {
@@ -68,8 +70,7 @@ class _AddPlaceButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        // TODO: remove hardcoded routing
-        Navigator.of(context).pushReplacementNamed('/galleries_map');
+        Navigator.of(context).pushReplacementNamed(Routes.galleriesMap);
       },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),

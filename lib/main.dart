@@ -16,6 +16,7 @@ import 'favorites/favorites_page.dart';
 import 'galleries/screens/map_page.dart';
 import 'galleries/services/map_service.dart';
 import 'navigation/app_drawer_factory.dart';
+import 'navigation/navigation_item.dart';
 import 'settings/app_settings.dart';
 import 'splash/splash_screen.dart';
 
@@ -61,18 +62,18 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
-        '/galleries_map': (context) => const MapPage(mapId: 'galleries'),
-        '/academic_buildings': (context) =>
+        Routes.galleriesMap: (context) => const MapPage(mapId: 'galleries'),
+        Routes.academicBuildings: (context) =>
             const MapPage(mapId: 'academicBuildings'),
-        '/virtual_gallery': (context) => const VirtualGalleryPage(),
-        '/favorites': (context) => const FavoritesPage(),
-        '/settings': (context) => const SettingsPage(),
-        '/libraries': (context) => const UnfinishedPage(),
-        '/cafes': (context) => const UnfinishedPage(),
-        '/dormitories': (context) => const UnfinishedPage(),
-        '/architecture': (context) => const UnfinishedPage(),
-        '/leisure': (context) => const UnfinishedPage(),
-        '/art_stores': (context) => const UnfinishedPage(),
+        Routes.virtualGallery: (context) => const VirtualGalleryPage(),
+        Routes.favorites: (context) => const FavoritesPage(),
+        Routes.settings: (context) => const SettingsPage(),
+        Routes.libraries: (context) => const UnfinishedPage(),
+        Routes.cafes: (context) => const UnfinishedPage(),
+        Routes.dormitories: (context) => const UnfinishedPage(),
+        Routes.architecture: (context) => const UnfinishedPage(),
+        Routes.leisure: (context) => const UnfinishedPage(),
+        Routes.artStores: (context) => const UnfinishedPage(),
       },
     );
   }

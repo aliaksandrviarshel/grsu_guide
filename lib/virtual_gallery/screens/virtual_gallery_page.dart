@@ -6,7 +6,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
-import '../../navigation/app_drawer_factory.dart';
+import '../../_common/back_button/app_back_button.dart';
 import '../services/picture_dto.dart';
 import '../services/virtual_gallery_service.dart';
 
@@ -22,8 +22,6 @@ class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Get.find<AppDrawerFactory>().drawer(),
-      endDrawer: Get.find<AppDrawerFactory>().endDrawer(),
       body: FutureBuilder(
           future: _connectivity.checkConnectivity(),
           builder: (context, snapshot) {
@@ -91,6 +89,8 @@ class VirtualGalleryListView extends StatelessWidget {
             pinned: true,
             centerTitle: true,
             automaticallyImplyLeading: false,
+            leading:
+                AppBackButton(onPressed: () => Navigator.of(context).pop()),
             title: Text(
               AppLocalizations.of(context)!.virtualGallery,
               style: TextStyle(

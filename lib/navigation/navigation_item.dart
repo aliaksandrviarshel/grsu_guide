@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-enum Routes {
-  galleriesMap,
-  academicBuildings,
-  libraries,
-  favorites,
-  cafes,
-  dormitories,
-  architecture,
-  leisure,
-  artStores,
-  virtualGallery,
-  settings,
+class Routes {
+  static const galleriesMap = '/galleries_map';
+  static const academicBuildings = '/academic_buildings';
+  static const libraries = '/libraries';
+  static const favorites = '/favorites';
+  static const cafes = '/cafes';
+  static const dormitories = '/dormitories';
+  static const architecture = '/architecture';
+  static const leisure = '/leisure';
+  static const artStores = '/art_stores';
+  static const virtualGallery = '/virtual_gallery';
+  static const settings = '/settings';
 }
 
 class NavigationItem {
@@ -21,8 +21,9 @@ class NavigationItem {
   final Widget smallIcon;
   final Widget largeIcon;
   final void Function(BuildContext) onTap;
-  final Routes route;
+  final String route;
   final String routeName;
+  late final bool isRoot;
 
   NavigationItem({
     required this.route,
@@ -31,9 +32,20 @@ class NavigationItem {
     required this.smallIcon,
     required this.largeIcon,
     required this.onTap,
-  });
+  }) {
+    isRoot = [
+      Routes.academicBuildings,
+      Routes.architecture,
+      Routes.artStores,
+      Routes.cafes,
+      Routes.dormitories,
+      Routes.galleriesMap,
+      Routes.leisure,
+      Routes.libraries
+    ].contains(route);
+  }
 
-  factory NavigationItem.fromRoute(Routes route, BuildContext context) {
+  factory NavigationItem.fromRoute(String route, BuildContext context) {
     return getNavItems(context).firstWhere((element) => element.route == route);
   }
 
@@ -43,7 +55,11 @@ class NavigationItem {
   }
 
   Future navigate(BuildContext context) {
-    return Navigator.of(context).pushReplacementNamed(routeName);
+    if (isRoot) {
+      return Navigator.of(context).pushReplacementNamed(routeName);
+    }
+
+    return Navigator.of(context).pushNamed(routeName);
   }
 }
 

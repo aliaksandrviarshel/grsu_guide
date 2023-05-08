@@ -29,9 +29,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: AppBackButton(
-          onPressed: () =>
-              // TODO: remove hardcoded routing
-              Navigator.of(context).pushReplacementNamed('/galleries_map'),
+          onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: FutureBuilder(
