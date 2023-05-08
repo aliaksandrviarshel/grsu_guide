@@ -62,7 +62,7 @@ class _MapPageState extends State<MapPage>
           future: MapService().getImageSrc(widget.mapId),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return Container();
+              return const DottedProgressIndicator();
             }
 
             return Stack(
