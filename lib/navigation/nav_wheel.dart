@@ -42,21 +42,21 @@ class _NavWheelState extends State<NavWheel> with TickerProviderStateMixin {
 
     final shiftedIndexes = _getShiftedIndexes(context);
     final screenWidth = MediaQuery.of(context).size.width;
-    return Transform.translate(
-      offset: _getOffset(screenWidth, context),
-      child: Stack(
-        children: [
-          for (var index in shiftedIndexes)
-            RotatedPetal(
+    return Stack(
+      children: [
+        for (var index in shiftedIndexes)
+          Transform.translate(
+            offset: _getOffset(screenWidth, context),
+            child: RotatedPetal(
               index: index,
               navigationItem: _navItems[index],
               rotationHandler: _createRotationHandler(
                   _getDisplayIndex(shiftedIndexes, index)),
               controller: _petalsController,
               onTap: _onPetalTap,
-            )
-        ],
-      ),
+            ),
+          )
+      ],
     );
   }
 
