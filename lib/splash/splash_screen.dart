@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:grsu_guide/navigation/routes.dart';
-import 'package:grsu_guide/splash/fake_progress_indicator.dart';
+import 'package:grsu_guide/splash/fake_progress_indicator/fake_progress_indicator.dart';
+
+import 'fake_progress_indicator/progress_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

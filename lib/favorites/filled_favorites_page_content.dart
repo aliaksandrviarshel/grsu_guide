@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../galleries/place.dart';
+import '../map/bottom_sheet/place.dart';
 
 import 'favorites_page_background.dart';
 

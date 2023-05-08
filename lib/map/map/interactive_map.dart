@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 
 import 'package:collection/collection.dart';
 
-import 'package:grsu_guide/galleries/map/parent_area_of_interest.dart';
-import 'package:grsu_guide/galleries/place.dart';
+import 'package:grsu_guide/map/map/parent_area_of_interest.dart';
+import 'package:grsu_guide/map/bottom_sheet/place.dart';
 
 import 'area_of_interest.dart';
 

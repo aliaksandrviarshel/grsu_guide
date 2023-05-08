@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:grsu_guide/_common/back_button/app_back_button.dart';
 import 'package:grsu_guide/_common/connection_checker/connection_checker.dart';
-import 'package:grsu_guide/galleries/services/places_service.dart';
+import 'package:grsu_guide/map/services/places_service.dart';
 
 import '../navigation/app_drawer_factory.dart';
 

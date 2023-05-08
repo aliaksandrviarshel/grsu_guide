@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:grsu_guide/galleries/place.dart';
+import 'package:grsu_guide/map/bottom_sheet/place.dart';
 
 abstract class AreaOfInterest {
   bool get isLeaf;

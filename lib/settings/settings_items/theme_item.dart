@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 
 import 'package:grsu_guide/settings/app_settings.dart';
 
-import '../../../theme/app_themes.dart';
-import '../settings_item_content.dart';
+import '../../theme/app_themes.dart';
+
+import 'settings_item_content.dart';
 
 class ThemeItem extends StatefulWidget {
   const ThemeItem({super.key});

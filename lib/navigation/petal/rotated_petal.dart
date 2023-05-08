@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:grsu_guide/navigation/nav_wheel.dart';
-import 'package:grsu_guide/navigation/navigation_item.dart';
+import 'package:grsu_guide/navigation/nav_wheel/nav_wheel.dart';
+import 'package:grsu_guide/navigation/nav_wheel/navigation_item.dart';
 import 'package:grsu_guide/navigation/petal/rotation_handler/left_rotation_handler.dart';
 
 import 'nav_petal.dart';

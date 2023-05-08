@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 
-import 'package:grsu_guide/galleries/map/interactive_map.dart';
-import 'package:grsu_guide/galleries/map/leaf_area_of_interest.dart';
-import 'package:grsu_guide/galleries/map/relative_area.dart';
+import 'package:grsu_guide/map/map/interactive_map.dart';
+import 'package:grsu_guide/map/map/leaf_area_of_interest.dart';
+import 'package:grsu_guide/map/map/relative_area.dart';
 
 import '../map/area_of_interest.dart';
 import '../map/parent_area_of_interest.dart';

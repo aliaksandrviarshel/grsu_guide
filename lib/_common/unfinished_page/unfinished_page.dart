@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import 'package:grsu_guide/_common/guide/tour_guide.dart';
 
-import '../navigation/app_drawer_factory.dart';
+import '../../navigation/app_drawer_factory.dart';
 
 class UnfinishedPage extends StatelessWidget {
   const UnfinishedPage({super.key});

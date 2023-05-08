@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
-import '../../app_settings.dart';
-import '../settings_item_content.dart';
+import '../app_settings.dart';
+
+import 'settings_item_content.dart';
 
 class LanguageItem extends StatefulWidget {
   const LanguageItem({super.key});

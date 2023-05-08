@@ -6,16 +6,17 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import 'package:grsu_guide/galleries/services/places_repository.dart';
-import 'package:grsu_guide/galleries/services/places_service.dart';
-import 'package:grsu_guide/settings/screens/settings_page.dart';
-import 'package:grsu_guide/unfinished_page/unfinished_page.dart';
-import 'package:grsu_guide/virtual_gallery/screens/virtual_gallery_page.dart';
+import 'package:grsu_guide/_common/unfinished_page/unfinished_page.dart';
+import 'package:grsu_guide/map/services/places_repository.dart';
+import 'package:grsu_guide/map/services/places_service.dart';
+import 'package:grsu_guide/navigation/nav_wheel/navigation_items_repository.dart';
+import 'package:grsu_guide/settings/settings_page.dart';
 import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_service.dart';
+import 'package:grsu_guide/virtual_gallery/virtual_gallery_page.dart';
 
 import 'favorites/favorites_page.dart';
-import 'galleries/screens/map_page.dart';
-import 'galleries/services/map_service.dart';
+import 'map/map_page.dart';
+import 'map/services/map_service.dart';
 import 'navigation/app_drawer_factory.dart';
 import 'navigation/routes.dart';
 import 'settings/app_settings.dart';
@@ -37,6 +38,7 @@ void main() async {
   Get.lazyPut(() => VirtualGalleryService());
   Get.lazyPut(() => AppDrawerFactory());
   Get.lazyPut(() => PlacesRepository());
+  Get.lazyPut(() => NavigationItemsRepository());
 
   Get.find<AppSettings>().init();
 }

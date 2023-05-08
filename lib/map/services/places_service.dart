@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../place.dart';
+import '../bottom_sheet/place.dart';
 
 import 'places_repository.dart';
 

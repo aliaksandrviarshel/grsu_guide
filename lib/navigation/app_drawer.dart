@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'nav_wheel.dart';
+import 'nav_wheel/nav_wheel.dart';
 
 class AppDrawer extends StatelessWidget {
   final NavWheelAlignment alignment;

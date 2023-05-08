@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../settings_item_content.dart';
+import 'settings_item_content.dart';
 
-class AboutDevelopersItem extends StatefulWidget {
+class AboutDevelopersItem extends StatelessWidget {
   const AboutDevelopersItem({super.key});
 
-  @override
-  State<AboutDevelopersItem> createState() => _AboutDevelopersItemState();
-}
-
-class _AboutDevelopersItemState extends State<AboutDevelopersItem> {
   @override
   Widget build(BuildContext context) {
     return SettingsItemContent(
@@ -21,9 +16,10 @@ class _AboutDevelopersItemState extends State<AboutDevelopersItem> {
           context: context,
           builder: (context) {
             return AlertDialog(
-                content: Text(
-              AppLocalizations.of(context)!.somethingAboutDevelopers,
-            ));
+              content: Text(
+                AppLocalizations.of(context)!.somethingAboutDevelopers,
+              ),
+            );
           },
         );
       },

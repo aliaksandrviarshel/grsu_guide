@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:grsu_guide/navigation/navigation_item.dart';
-import 'package:grsu_guide/navigation/petal/rotation_handler/left_rotation_handler.dart';
-import 'package:grsu_guide/navigation/petal/rotation_handler/rotation_handler.dart';
+import '../petal/petal_sizer.dart';
+import '../petal/rotated_petal.dart';
+import '../petal/rotated_petal_controller.dart';
+import '../petal/rotation_handler/left_rotation_handler.dart';
+import '../petal/rotation_handler/right_rotation_handler.dart';
+import '../petal/rotation_handler/rotation_handler.dart';
+import '../routes.dart';
 
-import 'petal/petal_sizer.dart';
-import 'petal/rotated_petal.dart';
-import 'petal/rotated_petal_controller.dart';
-import 'petal/rotation_handler/right_rotation_handler.dart';
-import 'routes.dart';
+import 'navigation_item.dart';
 
 enum NavWheelAlignment { left, right }
 

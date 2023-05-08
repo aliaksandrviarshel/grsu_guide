@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 
 import 'package:grsu_guide/_common/dotted_progress_indicator/dotted_progress_indicator.dart';
 
-import '../../_common/back_button/app_back_button.dart';
-import '../../_common/connection_checker/connection_checker.dart';
-import '../services/picture_dto.dart';
-import '../services/virtual_gallery_service.dart';
+import '../_common/back_button/app_back_button.dart';
+import '../_common/connection_checker/connection_checker.dart';
+import 'services/picture_dto.dart';
+import 'services/virtual_gallery_service.dart';
 
 class VirtualGalleryPage extends StatefulWidget {
   const VirtualGalleryPage({super.key});

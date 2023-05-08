@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:grsu_guide/galleries/services/place_dto.dart';
-import 'package:grsu_guide/galleries/services/places_service.dart';
+import 'package:grsu_guide/map/services/place_dto.dart';
+import 'package:grsu_guide/map/services/places_service.dart';
 
 class Place {
   final String id;

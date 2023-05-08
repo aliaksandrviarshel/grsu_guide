@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'progress_controller.dart';
+
 class FakeLinearProgressIndicator extends StatefulWidget {
   final Duration duration;
   final Color color;
@@ -20,10 +22,10 @@ class FakeLinearProgressIndicator extends StatefulWidget {
 
   @override
   State<FakeLinearProgressIndicator> createState() =>
-      _FakeLinearProgressIndicatorState();
+      FakeLinearProgressIndicatorState();
 }
 
-class _FakeLinearProgressIndicatorState
+class FakeLinearProgressIndicatorState
     extends State<FakeLinearProgressIndicator>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
@@ -81,17 +83,5 @@ class _FakeLinearProgressIndicatorState
         );
       },
     );
-  }
-}
-
-class ProgressController {
-  late final _FakeLinearProgressIndicatorState _state;
-
-  void attach(_FakeLinearProgressIndicatorState state) {
-    _state = state;
-  }
-
-  void speedUp() {
-    _state.speedUp();
   }
 }

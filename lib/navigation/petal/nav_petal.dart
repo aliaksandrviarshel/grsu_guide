@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:grsu_guide/navigation/nav_wheel.dart';
+import 'package:grsu_guide/navigation/nav_wheel/nav_wheel.dart';
 import 'package:grsu_guide/navigation/petal/petal_painter.dart';
 
 import 'petal_sizer.dart';

@@ -2,55 +2,23 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'routes.dart';
+import 'navigation_item.dart';
+import '../routes.dart';
 
-class NavigationItem {
-  final String name;
-  final Widget smallIcon;
-  final Widget largeIcon;
-  final String route;
-  final String routeName;
-  late final bool isRoot;
+class NavigationItemsRepository {
+  List<NavigationItem>? _navItems;
 
-  NavigationItem({
-    required this.route,
-    required this.routeName,
-    required this.name,
-    required this.smallIcon,
-    required this.largeIcon,
-  }) {
-    isRoot = [
-      Routes.academicBuildings,
-      Routes.architecture,
-      Routes.artStores,
-      Routes.cafes,
-      Routes.dormitories,
-      Routes.galleriesMap,
-      Routes.leisure,
-      Routes.libraries
-    ].contains(route);
+  NavigationItem getNavItem(BuildContext context, String routeName) {
+    return _lazyGetNavItems(context).firstWhere((element) => element.route == routeName);
   }
 
-  factory NavigationItem.fromRoute(String route, BuildContext context) {
-    return getNavItems(context).firstWhere((element) => element.route == route);
+  // TODO: make all large icons be the same size
+  List<NavigationItem> _lazyGetNavItems(BuildContext context) {
+    return _navItems ??= _getNavItems(context);
   }
 
-  bool isCurrent(BuildContext context) {
-    final currentRouteName = ModalRoute.of(context)!.settings.name;
-    return currentRouteName == routeName;
-  }
-
-  Future navigate(BuildContext context) {
-    if (isRoot) {
-      return Navigator.of(context).pushReplacementNamed(routeName);
-    }
-
-    return Navigator.of(context).pushNamed(routeName);
-  }
-}
-
-// TODO: make all large icons be the same size
-getNavItems(BuildContext context) => [
+  List<NavigationItem> _getNavItems(BuildContext context) {
+    return [
       NavigationItem(
         route: Routes.galleriesMap,
         routeName: Routes.galleriesMap,
@@ -170,3 +138,5 @@ getNavItems(BuildContext context) => [
             height: 110),
       ),
     ];
+  }
+}

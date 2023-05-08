@@ -6,17 +6,10 @@ import 'package:provider/provider.dart';
 
 import 'package:grsu_guide/settings/app_settings.dart';
 
-import '../settings_item_content.dart';
+import 'settings_item_content.dart';
 
-class ForLeftHandedItem extends StatefulWidget {
+class ForLeftHandedItem extends StatelessWidget {
   const ForLeftHandedItem({super.key});
-
-  @override
-  State<ForLeftHandedItem> createState() => _ForLeftHandedItemState();
-}
-
-class _ForLeftHandedItemState extends State<ForLeftHandedItem> {
-  final _settingsService = Get.find<AppSettings>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +17,7 @@ class _ForLeftHandedItemState extends State<ForLeftHandedItem> {
       title: Provider.of<AppSettings>(context).isForLeftHanded
           ? AppLocalizations.of(context)!.forLefties
           : AppLocalizations.of(context)!.forRighties,
-      onTap: _settingsService.toggleForLeftHanded,
+      onTap: Get.find<AppSettings>().toggleForLeftHanded,
     );
   }
 }

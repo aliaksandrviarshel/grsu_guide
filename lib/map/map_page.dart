@@ -4,17 +4,18 @@ import 'package:get/get.dart';
 
 import 'package:grsu_guide/_common/connection_checker/connection_checker.dart';
 import 'package:grsu_guide/_common/guide/tour_guide.dart';
-import 'package:grsu_guide/galleries/map/leaf_area_of_interest.dart';
-import 'package:grsu_guide/galleries/place.dart';
+import 'package:grsu_guide/map/map/leaf_area_of_interest.dart';
+import 'package:grsu_guide/map/bottom_sheet/place.dart';
 
-import '../../_common/back_button/app_back_button.dart';
-import '../../_common/dotted_progress_indicator/dotted_progress_indicator.dart';
-import '../../navigation/app_drawer_factory.dart';
-import '../bottom_sheet/place_info_bottom_sheet..dart';
-import '../map/area_of_interest.dart';
-import '../map/interactive_map.dart';
-import '../services/map_service.dart';
-import '../services/places_service.dart';
+import '../_common/back_button/app_back_button.dart';
+import '../_common/dotted_progress_indicator/dotted_progress_indicator.dart';
+import '../navigation/app_drawer_factory.dart';
+
+import 'bottom_sheet/place_info_bottom_sheet..dart';
+import 'map/area_of_interest.dart';
+import 'map/interactive_map.dart';
+import 'services/map_service.dart';
+import 'services/places_service.dart';
 
 // TODO: get image with shadow
 class MapPage extends StatefulWidget {
