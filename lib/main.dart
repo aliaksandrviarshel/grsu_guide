@@ -61,14 +61,18 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
-        '/galleries_map': (context) =>
-            const MapPage(mapId: 'galleries'),
+        '/galleries_map': (context) => const MapPage(mapId: 'galleries'),
         '/academic_buildings': (context) =>
             const MapPage(mapId: 'academicBuildings'),
         '/virtual_gallery': (context) => const VirtualGalleryPage(),
         '/favorites': (context) => const FavoritesPage(),
         '/settings': (context) => const SettingsPage(),
-        '/empty': (context) => const UnfinishedPage(),
+        '/libraries': (context) => const UnfinishedPage(),
+        '/cafes': (context) => const UnfinishedPage(),
+        '/dormitories': (context) => const UnfinishedPage(),
+        '/architecture': (context) => const UnfinishedPage(),
+        '/leisure': (context) => const UnfinishedPage(),
+        '/art_stores': (context) => const UnfinishedPage(),
       },
     );
   }

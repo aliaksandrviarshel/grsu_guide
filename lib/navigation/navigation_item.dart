@@ -74,7 +74,7 @@ getNavItems(BuildContext context) => [
       ),
       NavigationItem(
         route: Routes.libraries,
-        routeName: '/empty',
+        routeName: '/libraries',
         name: AppLocalizations.of(context)!.librariesAndReadingRooms,
         smallIcon: Image.asset(
           'assets/icons/navigation/libraries_small.png',
@@ -98,7 +98,7 @@ getNavItems(BuildContext context) => [
       ),
       NavigationItem(
         route: Routes.cafes,
-        routeName: '/empty',
+        routeName: '/cafes',
         name: AppLocalizations.of(context)!.cafeDiningRooms,
         smallIcon: Image.asset(
           'assets/icons/navigation/cafes_small.png',
@@ -109,7 +109,7 @@ getNavItems(BuildContext context) => [
       ),
       NavigationItem(
         route: Routes.dormitories,
-        routeName: '/empty',
+        routeName: '/dormitories',
         name: AppLocalizations.of(context)!.dormitories,
         smallIcon: Image.asset(
           'assets/icons/navigation/dormitories_small.png',
@@ -120,7 +120,7 @@ getNavItems(BuildContext context) => [
       ),
       NavigationItem(
         route: Routes.architecture,
-        routeName: '/empty',
+        routeName: '/architecture',
         name: AppLocalizations.of(context)!.architecture,
         smallIcon: Image.asset(
           'assets/icons/navigation/architecture_small.png',
@@ -132,7 +132,7 @@ getNavItems(BuildContext context) => [
       ),
       NavigationItem(
         route: Routes.leisure,
-        routeName: '/empty',
+        routeName: '/leisure',
         name: AppLocalizations.of(context)!.leisure,
         smallIcon: Image.asset(
           'assets/icons/navigation/leisure_small.png',
@@ -143,7 +143,7 @@ getNavItems(BuildContext context) => [
       ),
       NavigationItem(
         route: Routes.artStores,
-        routeName: '/empty',
+        routeName: '/art_stores',
         name: AppLocalizations.of(context)!.artShopsAndPhotoStudios,
         smallIcon: Image.asset(
           'assets/icons/navigation/art_stores_small.png',
