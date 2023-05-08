@@ -16,16 +16,16 @@ import '../services/places_service.dart';
 
 // TODO: change bottomsheet animation
 // TODO: get image with shadow
-class GalleriesPage extends StatefulWidget {
+class MapPage extends StatefulWidget {
   final String mapId;
 
-  const GalleriesPage({super.key, required this.mapId});
+  const MapPage({super.key, required this.mapId});
 
   @override
-  State<GalleriesPage> createState() => _GalleriesPageState();
+  State<MapPage> createState() => _MapPageState();
 }
 
-class _GalleriesPageState extends State<GalleriesPage>
+class _MapPageState extends State<MapPage>
     with TickerProviderStateMixin, WidgetsBindingObserver {
   final GlobalKey _imageKey = GlobalKey();
   final _transformationController = TransformationController();
@@ -118,6 +118,7 @@ class _GalleriesPageState extends State<GalleriesPage>
 
   Future<void> _initMap(BuildContext context, Size renderedSize) async {
     _map = await Get.find<MapService>().getMap(
+      widget.mapId,
       renderedSize,
       _imageKey,
       _transformationController,

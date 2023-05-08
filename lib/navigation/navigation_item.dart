@@ -62,7 +62,7 @@ getNavItems(BuildContext context) => [
       ),
       NavigationItem(
         route: Routes.academicBuildings,
-        routeName: '/empty',
+        routeName: '/academic_buildings',
         name: AppLocalizations.of(context)!.academicBuildingsAndPersonalities,
         smallIcon: Image.asset(
           'assets/icons/navigation/academic_buildings_small.png',

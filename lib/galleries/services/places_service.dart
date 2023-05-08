@@ -22,12 +22,12 @@ class PlacesService {
   }
 
   Future<Place> getPlace(String placeId) async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+    final querySnapshot = await FirebaseFirestore.instance
         .collection('places')
-        .where('id', isEqualTo: placeId)
+        .doc(placeId)
         .get();
-    var doc = querySnapshot.docs[0];
-    var placeDto = PlaceDto.fromMap(doc.data() as Map<String, dynamic>);
+    var placeDto =
+        PlaceDto.fromMap(querySnapshot.data() as Map<String, dynamic>);
 
     final prefs = await SharedPreferences.getInstance();
     final favoritePlacesIds = prefs.getStringList('favorite_places') ?? [];

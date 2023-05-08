@@ -13,7 +13,7 @@ import 'package:grsu_guide/virtual_gallery/screens/virtual_gallery_page.dart';
 import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_service.dart';
 
 import 'favorites/favorites_page.dart';
-import 'galleries/screens/galleries_page.dart';
+import 'galleries/screens/map_page.dart';
 import 'galleries/services/map_service.dart';
 import 'navigation/app_drawer_factory.dart';
 import 'settings/app_settings.dart';
@@ -62,7 +62,9 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/': (context) => const SplashScreen(),
         '/galleries_map': (context) =>
-            const GalleriesPage(mapId: 'eb94f6b4-06ff-4dd3-9ec6-36f5a7baa2b9'),
+            const MapPage(mapId: 'galleries'),
+        '/academic_buildings': (context) =>
+            const MapPage(mapId: 'academicBuildings'),
         '/virtual_gallery': (context) => const VirtualGalleryPage(),
         '/favorites': (context) => const FavoritesPage(),
         '/settings': (context) => const SettingsPage(),
