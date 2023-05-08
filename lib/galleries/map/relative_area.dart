@@ -9,16 +9,17 @@ class RelativeArea {
     Size originalSize,
     Size renderedSize,
   ) {
-    final double ratioX = renderedSize.width / originalSize.width;
-    final double ratioY = renderedSize.height / originalSize.height;
+    final smallImgHeight = renderedSize.width / originalSize.aspectRatio;
+    final topOffset = renderedSize.height / 2 - smallImgHeight / 2;
 
-    final double renderedLeft = originalRect.left * ratioX;
-    final double renderedTop = originalRect.top * ratioY;
-    final double renderedRight = originalRect.right * ratioX;
-    final double renderedBottom = originalRect.bottom * ratioY;
-
+    final double ratio = renderedSize.width / originalSize.width;
+    final double renderedLeft = originalRect.left * ratio;
+    final double renderedTop = originalRect.top * ratio;
+    final double renderedRight = originalRect.right * ratio;
+    final double renderedBottom = originalRect.bottom * ratio;
     _rect =
-        Rect.fromLTRB(renderedLeft, renderedTop, renderedRight, renderedBottom);
+        Rect.fromLTRB(renderedLeft, renderedTop, renderedRight, renderedBottom)
+            .translate(0, topOffset);
   }
 
   bool contains(Offset localPosition) {
