@@ -1,14 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import 'package:grsu_guide/_common/dotted_progress_indicator/dotted_progress_indicator.dart';
 
 import '../../_common/back_button/app_back_button.dart';
+import '../../_common/connection_checker/connection_checker.dart';
 import '../services/picture_dto.dart';
 import '../services/virtual_gallery_service.dart';
 
@@ -20,50 +18,20 @@ class VirtualGalleryPage extends StatefulWidget {
 }
 
 class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
-  final _connectivity = Connectivity();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-          future: _connectivity.checkConnectivity(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const Center(child: DottedProgressIndicator());
-            }
+      body: ConnectionChecker(
+        child: FutureBuilder(
+            future: Get.find<VirtualGalleryService>().getPictures(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const DottedProgressIndicator();
+              }
 
-            if (snapshot.requireData == ConnectivityResult.none) {
-              StreamSubscription? listener;
-              listener = _connectivity.onConnectivityChanged.listen((event) {
-                if (event != ConnectivityResult.none) {
-                  listener?.cancel();
-                  setState(() {});
-                }
-              });
-
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.signal_wifi_off, size: 64),
-                  Text(
-                    AppLocalizations.of(context)!
-                        .toAccessThisPageYouNeedAnInternetConnection,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 24),
-                  ),
-                ],
-              );
-            }
-
-            return FutureBuilder(
-                future: Get.find<VirtualGalleryService>().getPictures(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(child: DottedProgressIndicator());
-                  }
-
-                  return VirtualGalleryListView(pictures: snapshot.requireData);
-                });
-          }),
+              return VirtualGalleryListView(pictures: snapshot.requireData);
+            }),
+      ),
     );
   }
 }

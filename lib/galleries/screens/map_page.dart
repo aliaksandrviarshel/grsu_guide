@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import 'package:grsu_guide/_common/connection_checker/connection_checker.dart';
 import 'package:grsu_guide/_common/guide/tour_guide.dart';
 import 'package:grsu_guide/galleries/map/leaf_area_of_interest.dart';
 import 'package:grsu_guide/galleries/place.dart';
@@ -58,54 +59,56 @@ class _MapPageState extends State<MapPage>
       ),
       drawer: Get.find<AppDrawerFactory>().drawer(),
       endDrawer: Get.find<AppDrawerFactory>().endDrawer(),
-      body: FutureBuilder(
-          future: MapService().getImageSrc(widget.mapId),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const DottedProgressIndicator();
-            }
+      body: ConnectionChecker(
+        child: FutureBuilder(
+            future: MapService().getImageSrc(widget.mapId),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const DottedProgressIndicator();
+              }
 
-            return Stack(
-              fit: StackFit.expand,
-              children: [
-                GestureDetector(
-                  onTapUp: _onTapUp,
-                  child: InteractiveViewer(
-                    scaleEnabled: false,
-                    panAxis: _map?.isZoomed() ?? true
-                        ? PanAxis.free
-                        : PanAxis.vertical,
-                    transformationController: _transformationController,
-                    child: LayoutBuilder(builder: (context, constraints) {
-                      if (_map == null) {
-                        _initMap(
-                          context,
-                          Size(constraints.maxWidth, constraints.maxHeight),
-                        ).then((_) => _zoomToInitialPlace(context));
-                      }
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  GestureDetector(
+                    onTapUp: _onTapUp,
+                    child: InteractiveViewer(
+                      scaleEnabled: false,
+                      panAxis: _map?.isZoomed() ?? true
+                          ? PanAxis.free
+                          : PanAxis.vertical,
+                      transformationController: _transformationController,
+                      child: LayoutBuilder(builder: (context, constraints) {
+                        if (_map == null) {
+                          _initMap(
+                            context,
+                            Size(constraints.maxWidth, constraints.maxHeight),
+                          ).then((_) => _zoomToInitialPlace(context));
+                        }
 
-                      return Image.network(
-                        key: _imageKey,
-                        snapshot.requireData,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          }
+                        return Image.network(
+                          key: _imageKey,
+                          snapshot.requireData,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
 
-                          return const DottedProgressIndicator();
-                        },
-                      );
-                    }),
+                            return const DottedProgressIndicator();
+                          },
+                        );
+                      }),
+                    ),
                   ),
-                ),
-                AnimatedOpacity(
-                  opacity: _isInitial ? 1 : 0,
-                  duration: const Duration(milliseconds: 300),
-                  child: _showGuide ? const TourGuide() : null,
-                ),
-              ],
-            );
-          }),
+                  AnimatedOpacity(
+                    opacity: _isInitial ? 1 : 0,
+                    duration: const Duration(milliseconds: 300),
+                    child: _showGuide ? const TourGuide() : null,
+                  ),
+                ],
+              );
+            }),
+      ),
     );
   }
 
