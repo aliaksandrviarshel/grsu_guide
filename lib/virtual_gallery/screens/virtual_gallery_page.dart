@@ -6,6 +6,8 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
+import 'package:grsu_guide/_common/dotted_progress_indicator/dotted_progress_indicator.dart';
+
 import '../../_common/back_button/app_back_button.dart';
 import '../services/picture_dto.dart';
 import '../services/virtual_gallery_service.dart';
@@ -26,7 +28,7 @@ class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
           future: _connectivity.checkConnectivity(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: DottedProgressIndicator());
             }
 
             if (snapshot.requireData == ConnectivityResult.none) {
@@ -56,7 +58,7 @@ class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
                 future: Get.find<VirtualGalleryService>().getPictures(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: DottedProgressIndicator());
                   }
 
                   return VirtualGalleryListView(pictures: snapshot.requireData);

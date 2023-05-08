@@ -4,6 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:grsu_guide/galleries/place.dart';
 
+import '../../_common/dotted_progress_indicator/dotted_progress_indicator.dart';
+
 import 'favorite_button.dart';
 
 // TODO: favorite places functionality (have to identificate places by id)
@@ -32,6 +34,7 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
     });
     final place = widget.place;
     final colorScheme = Theme.of(context).colorScheme;
+    var imageHeight = MediaQuery.of(context).size.height * .4;
 
     return SingleChildScrollView(
       child: Container(
@@ -59,7 +62,14 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
                           ),
                           child: Image.network(
                             place.imageSrc,
-                            height: MediaQuery.of(context).size.height * .4,
+                            height: imageHeight,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              }
+
+                              return Container(height: imageHeight, child: const DottedProgressIndicator());
+                            },
                           ),
                         ),
                       ),

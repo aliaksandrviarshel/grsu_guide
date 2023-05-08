@@ -7,6 +7,7 @@ import 'package:grsu_guide/galleries/map/leaf_area_of_interest.dart';
 import 'package:grsu_guide/galleries/place.dart';
 
 import '../../_common/back_button/app_back_button.dart';
+import '../../_common/dotted_progress_indicator/dotted_progress_indicator.dart';
 import '../../navigation/app_drawer_factory.dart';
 import '../bottom_sheet/place_info_bottom_sheet..dart';
 import '../map/area_of_interest.dart';
@@ -84,8 +85,15 @@ class _MapPageState extends State<MapPage>
                       }
 
                       return Image.network(
-                        snapshot.requireData,
                         key: _imageKey,
+                        snapshot.requireData,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+
+                          return const DottedProgressIndicator();
+                        },
                       );
                     }),
                   ),
