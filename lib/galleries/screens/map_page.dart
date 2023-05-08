@@ -6,7 +6,7 @@ import 'package:grsu_guide/_common/guide/tour_guide.dart';
 import 'package:grsu_guide/galleries/map/leaf_area_of_interest.dart';
 import 'package:grsu_guide/galleries/place.dart';
 
-import '../../_common/back_button/back_button.dart';
+import '../../_common/back_button/app_back_button.dart';
 import '../../navigation/app_drawer_factory.dart';
 import '../bottom_sheet/place_info_bottom_sheet..dart';
 import '../map/area_of_interest.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:grsu_guide/_common/back_button/back_button.dart';
+import 'package:grsu_guide/_common/back_button/app_back_button.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/about_developers_item.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/language_item.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/theme_item.dart';
