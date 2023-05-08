@@ -7,21 +7,24 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'package:grsu_guide/_common/unfinished_page/unfinished_page.dart';
+import 'package:grsu_guide/map/services/map_firebase_repository.dart';
 import 'package:grsu_guide/map/services/map_repository.dart';
-import 'package:grsu_guide/map/services/places_repository.dart';
+import 'package:grsu_guide/map/services/places_firebase_repository.dart';
 import 'package:grsu_guide/map/services/places_service.dart';
 import 'package:grsu_guide/navigation/nav_wheel/navigation_items_service.dart';
 import 'package:grsu_guide/settings/settings_page.dart';
-import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_repository.dart';
+import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_firebase_repository.dart';
 import 'package:grsu_guide/virtual_gallery/virtual_gallery_page.dart';
 
 import 'favorites/favorites_page.dart';
 import 'map/map_page.dart';
 import 'map/services/map_service.dart';
+import 'map/services/places_repository.dart';
 import 'navigation/app_drawer_factory.dart';
 import 'navigation/routes.dart';
 import 'settings/app_settings.dart';
 import 'splash/splash_screen.dart';
+import 'virtual_gallery/services/virtual_gallery_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,10 +38,11 @@ void main() async {
     ),
   );
   Get.lazyPut(() => MapService());
-  Get.lazyPut(() => MapRepository());
+  Get.lazyPut<MapRepository>(() => MapFirebaseRepository());
   Get.lazyPut(() => PlacesService());
-  Get.lazyPut(() => PlacesRepository());
-  Get.lazyPut(() => VirtualGalleryRepository());
+  Get.lazyPut<PlacesRepository>(() => PlacesFirebaseRepository());
+  Get.lazyPut<VirtualGalleryRepository>(
+      () => VirtualGalleryFirebaseRepository());
   Get.lazyPut(() => AppDrawerFactory());
   Get.lazyPut(() => NavigationItemsService());
 
