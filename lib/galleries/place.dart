@@ -7,6 +7,7 @@ import 'package:grsu_guide/galleries/services/places_service.dart';
 
 class Place {
   final String id;
+  final String mapId;
   final String imageSrc;
   final String name;
   final String description;
@@ -16,6 +17,7 @@ class Place {
 
   Place({
     required this.id,
+    required this.mapId,
     required this.imageSrc,
     required this.name,
     required this.description,
@@ -25,6 +27,7 @@ class Place {
   factory Place.fromDto(PlaceDto dto) {
     return Place(
       id: dto.id,
+      mapId: dto.mapId,
       imageSrc: dto.imageSrc,
       name: dto.name,
       description: dto.description,
@@ -42,8 +45,9 @@ class Place {
 
   Future<void> navigateToMap(BuildContext context) async {
     // TODO: change logic when a new map will be added
+    print(mapId);
     await Navigator.of(context).pushReplacementNamed(
-      '/galleries_map',
+      '/$mapId',
       arguments: this,
     );
   }

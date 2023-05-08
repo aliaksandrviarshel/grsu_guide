@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import 'package:grsu_guide/galleries/services/places_repository.dart';
 import 'package:grsu_guide/galleries/services/places_service.dart';
 import 'package:grsu_guide/settings/screens/settings_page.dart';
 import 'package:grsu_guide/unfinished_page/unfinished_page.dart';
@@ -31,10 +32,11 @@ void main() async {
       child: const MyApp(),
     ),
   );
-  Get.put(MapService());
-  Get.put(PlacesService());
-  Get.put(VirtualGalleryService());
-  Get.put(AppDrawerFactory());
+  Get.lazyPut(() => MapService());
+  Get.lazyPut(() => PlacesService());
+  Get.lazyPut(() => VirtualGalleryService());
+  Get.lazyPut(() => AppDrawerFactory());
+  Get.lazyPut(() => PlacesRepository());
 
   Get.find<AppSettings>().init();
 }

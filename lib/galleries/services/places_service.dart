@@ -1,20 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:grsu_guide/galleries/services/place_dto.dart';
-
 import '../place.dart';
 
+import 'places_repository.dart';
+
 class PlacesService {
+  final _placesRepository = Get.find<PlacesRepository>();
+
   Future<List<Place>> getFavoritePlaces() async {
-    QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection('places').get();
-    final doc = querySnapshot.docs;
+    final placeDtos = await _placesRepository.getPlaces();
     final prefs = await SharedPreferences.getInstance();
     final favoritePlacesIds = prefs.getStringList('favorite_places') ?? [];
-    final placeDtos = querySnapshot.docs
-        .map((e) => PlaceDto.fromMap(e.data() as Map<String, dynamic>));
     return placeDtos
         .where((element) => favoritePlacesIds.contains(element.id))
         .map((e) => Place.fromDto(e))
@@ -22,13 +19,7 @@ class PlacesService {
   }
 
   Future<Place> getPlace(String placeId) async {
-    final querySnapshot = await FirebaseFirestore.instance
-        .collection('places')
-        .doc(placeId)
-        .get();
-    var placeDto =
-        PlaceDto.fromMap(querySnapshot.data() as Map<String, dynamic>);
-
+    final placeDto = await _placesRepository.getPlace(placeId);
     final prefs = await SharedPreferences.getInstance();
     final favoritePlacesIds = prefs.getStringList('favorite_places') ?? [];
     placeDto.isFavorite = favoritePlacesIds.contains(placeId);
