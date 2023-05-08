@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:grsu_guide/navigation/nav_wheel/navigation_items_repository.dart';
+import 'package:grsu_guide/navigation/nav_wheel/navigation_items_service.dart';
 
 import '../routes.dart';
 
@@ -34,7 +34,7 @@ class NavigationItem {
   }
 
   factory NavigationItem.fromRoute(String route, BuildContext context) {
-    return Get.find<NavigationItemsRepository>().getNavItem(context, route);
+    return Get.find<NavigationItemsService>().getNavItem(context, route);
   }
 
   bool isCurrent(BuildContext context) {

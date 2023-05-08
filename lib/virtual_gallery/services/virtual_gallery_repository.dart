@@ -5,7 +5,7 @@ import '../../settings/app_settings.dart';
 
 import 'picture_dto.dart';
 
-class VirtualGalleryService {
+class VirtualGalleryRepository {
   final _settings = Get.find<AppSettings>();
   final _languageCodeCollectionPathMap = {
     'ru': 'vr_gallery',
@@ -14,13 +14,13 @@ class VirtualGalleryService {
 
   Future<List<PictureDto>> getPictures() async {
     QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection(getCollectionPath()).get();
+        await FirebaseFirestore.instance.collection(_getCollectionPath()).get();
     return querySnapshot.docs
         .map((e) => PictureDto.fromMap(e.data() as Map<String, dynamic>))
         .toList();
   }
 
-  String getCollectionPath() {
+  String _getCollectionPath() {
     final languageCode = _settings.currentLocale.languageCode;
     return _languageCodeCollectionPathMap[languageCode]!;
   }

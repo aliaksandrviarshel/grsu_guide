@@ -7,11 +7,12 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'package:grsu_guide/_common/unfinished_page/unfinished_page.dart';
+import 'package:grsu_guide/map/services/map_repository.dart';
 import 'package:grsu_guide/map/services/places_repository.dart';
 import 'package:grsu_guide/map/services/places_service.dart';
-import 'package:grsu_guide/navigation/nav_wheel/navigation_items_repository.dart';
+import 'package:grsu_guide/navigation/nav_wheel/navigation_items_service.dart';
 import 'package:grsu_guide/settings/settings_page.dart';
-import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_service.dart';
+import 'package:grsu_guide/virtual_gallery/services/virtual_gallery_repository.dart';
 import 'package:grsu_guide/virtual_gallery/virtual_gallery_page.dart';
 
 import 'favorites/favorites_page.dart';
@@ -34,11 +35,12 @@ void main() async {
     ),
   );
   Get.lazyPut(() => MapService());
+  Get.lazyPut(() => MapRepository());
   Get.lazyPut(() => PlacesService());
-  Get.lazyPut(() => VirtualGalleryService());
-  Get.lazyPut(() => AppDrawerFactory());
   Get.lazyPut(() => PlacesRepository());
-  Get.lazyPut(() => NavigationItemsRepository());
+  Get.lazyPut(() => VirtualGalleryRepository());
+  Get.lazyPut(() => AppDrawerFactory());
+  Get.lazyPut(() => NavigationItemsService());
 
   Get.find<AppSettings>().init();
 }

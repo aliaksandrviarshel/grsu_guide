@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'navigation_item.dart';
 import '../routes.dart';
 
-class NavigationItemsRepository {
+import 'navigation_item.dart';
+
+class NavigationItemsService {
   List<NavigationItem>? _navItems;
 
   NavigationItem getNavItem(BuildContext context, String routeName) {
-    return _lazyGetNavItems(context).firstWhere((element) => element.route == routeName);
+    return _lazyGetNavItems(context)
+        .firstWhere((element) => element.route == routeName);
   }
 
   // TODO: make all large icons be the same size

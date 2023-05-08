@@ -7,8 +7,9 @@ import 'package:grsu_guide/_common/dotted_progress_indicator/dotted_progress_ind
 
 import '../_common/back_button/app_back_button.dart';
 import '../_common/connection_checker/connection_checker.dart';
+
 import 'services/picture_dto.dart';
-import 'services/virtual_gallery_service.dart';
+import 'services/virtual_gallery_repository.dart';
 
 class VirtualGalleryPage extends StatefulWidget {
   const VirtualGalleryPage({super.key});
@@ -23,7 +24,7 @@ class _VirtualGalleryPageState extends State<VirtualGalleryPage> {
     return Scaffold(
       body: ConnectionChecker(
         child: FutureBuilder(
-            future: Get.find<VirtualGalleryService>().getPictures(),
+            future: Get.find<VirtualGalleryRepository>().getPictures(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return const DottedProgressIndicator();

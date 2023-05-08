@@ -2,20 +2,18 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
 import '../map/area_of_interest.dart';
 import '../map/interactive_map.dart';
 
-import 'map_dto.dart';
+import 'map_repository.dart';
 
 class MapService {
+  final _mapRepository = Get.find<MapRepository>();
+
   Future<String> getImageSrc(String mapId) async {
-    final documentSnapshot =
-        await FirebaseFirestore.instance.collection('maps').doc(mapId).get();
-    final mapDto =
-        MapDto.fromMap(documentSnapshot.data() as Map<String, dynamic>);
-    return mapDto.imageSrc;
+    return _mapRepository.getImageSrc(mapId);
   }
 
   Future<InteractiveMap> getMap(
@@ -32,11 +30,7 @@ class MapService {
       onTapped,
     );
 
-    final documentSnapshot =
-        await FirebaseFirestore.instance.collection('maps').doc(mapId).get();
-    final mapDto =
-        MapDto.fromMap(documentSnapshot.data() as Map<String, dynamic>);
-
+    final mapDto = await _mapRepository.getMap(mapId);
     final originalSize = await _getImageSize(mapDto.imageSrc);
     final areas = mapDto.areas
         .map((e) => e.toAreaOfInterest(
