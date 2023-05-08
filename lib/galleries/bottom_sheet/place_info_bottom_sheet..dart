@@ -57,7 +57,10 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
                             topLeft: Radius.circular(100),
                             bottomRight: Radius.circular(100),
                           ),
-                          child: Image.asset(place.imageSrc),
+                          child: Image.network(
+                            place.imageSrc,
+                            height: MediaQuery.of(context).size.height * .4,
+                          ),
                         ),
                       ),
                     ),
@@ -88,7 +91,6 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  
                                   AppLocalizations.of(context)!.addToFavorites,
                                   style: TextStyle(
                                     color: colorScheme.onBackground,

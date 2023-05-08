@@ -83,7 +83,7 @@ class _GalleriesPageState extends State<GalleriesPage>
                         ).then((_) => _zoomToInitialPlace(context));
                       }
 
-                      return Image.asset(
+                      return Image.network(
                         snapshot.requireData,
                         key: _imageKey,
                       );

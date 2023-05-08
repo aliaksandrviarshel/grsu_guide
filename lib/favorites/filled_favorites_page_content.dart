@@ -168,7 +168,7 @@ class _PlaceCardState extends State<_PlaceCard> {
                     ),
                     child: Stack(
                       children: [
-                        Image.asset(
+                        Image.network(
                           width: 88,
                           fit: BoxFit.fitWidth,
                           widget.place.imageSrc,

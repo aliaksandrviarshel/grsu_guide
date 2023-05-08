@@ -10,15 +10,15 @@ import '../map/area_of_interest.dart';
 import '../map/parent_area_of_interest.dart';
 
 class AreaOfInterestDto {
-  int? placeId;
+  String? placeId;
   String coordinates;
   String shape;
-  List<AreaOfInterestDto> childAreas;
+  List<AreaOfInterestDto> areas;
 
   AreaOfInterestDto({
     required this.coordinates,
     required this.shape,
-    required this.childAreas,
+    required this.areas,
     this.placeId,
   });
 
@@ -29,7 +29,7 @@ class AreaOfInterestDto {
     TransformationController transformationController,
     TickerProvider tickerProvider,
     void Function(AreaOfInterest) onTapped,
-    int? placeId,
+    String? placeId,
     InteractiveMap map,
   ) {
     final relativeArea = RelativeArea.fromRect(
@@ -37,7 +37,7 @@ class AreaOfInterestDto {
       originalSize,
       renderedSize,
     );
-    if (childAreas.isEmpty) {
+    if (areas.isEmpty) {
       return LeafAreaOfInterest.fromRect(
         relativeArea,
         imageKey,
@@ -52,7 +52,7 @@ class AreaOfInterestDto {
       transformationController,
       tickerProvider,
       onTapped,
-      childAreas
+      areas
           .map((e) => e.toAreaOfInterest(
                 originalSize,
                 renderedSize,
@@ -73,17 +73,17 @@ class AreaOfInterestDto {
       'placeId': placeId,
       'coordinates': coordinates,
       'shape': shape,
-      'childAreas': childAreas.map((x) => x.toMap()).toList(),
+      'areas': areas.map((x) => x.toMap()).toList(),
     };
   }
 
   factory AreaOfInterestDto.fromMap(Map<String, dynamic> map) {
     return AreaOfInterestDto(
-      placeId: map['placeId'] != null ? map['placeId'] as int : null,
+      placeId: map['placeId'] != null ? map['placeId'] as String : null,
       coordinates: map['coordinates'] as String,
       shape: map['shape'] as String,
-      childAreas: List<AreaOfInterestDto>.from(
-        (map['childAreas'] as List<dynamic>).map<AreaOfInterestDto>(
+      areas: List<AreaOfInterestDto>.from(
+        (map['areas'] as List<dynamic>).map<AreaOfInterestDto>(
           (x) => AreaOfInterestDto.fromMap(x as Map<String, dynamic>),
         ),
       ),

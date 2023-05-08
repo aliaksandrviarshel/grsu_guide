@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../map/area_of_interest.dart';
 import '../map/interactive_map.dart';
 
@@ -10,9 +12,10 @@ import 'map_dto.dart';
 
 class MapService {
   Future<String> getImageSrc(String mapId) async {
-    final jsonString =
-        await rootBundle.loadString('assets/maps/galleries.json');
-    var mapDto = MapDto.fromJson(jsonString);
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('maps').get();
+    var doc = querySnapshot.docs[0];
+    var mapDto = MapDto.fromMap(doc.data() as Map<String, dynamic>);
     return mapDto.imageSrc;
   }
 
@@ -29,9 +32,11 @@ class MapService {
       onTapped,
     );
 
-    final jsonString =
-        await rootBundle.loadString('assets/maps/galleries.json');
-    var mapDto = MapDto.fromJson(jsonString);
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('maps').get();
+    var doc = querySnapshot.docs[0];
+    var mapDto = MapDto.fromMap(doc.data() as Map<String, dynamic>);
+    
     final originalSize = await _getImageSize(mapDto.imageSrc);
     final areas = mapDto.areas
         .map((e) => e.toAreaOfInterest(
@@ -51,7 +56,7 @@ class MapService {
 
   Future<Size> _getImageSize(String assetName) {
     Completer<Size> completer = Completer();
-    Image image = Image.asset(assetName);
+    Image image = Image.network(assetName);
     image.image.resolve(const ImageConfiguration()).addListener(
       ImageStreamListener(
         (ImageInfo info, bool _) {

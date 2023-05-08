@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:grsu_guide/galleries/services/place_entity.dart';
+import 'package:grsu_guide/galleries/services/place_dto.dart';
 import 'package:grsu_guide/galleries/services/places_service.dart';
 
 class Place {
-  final int id;
+  final String id;
   final String imageSrc;
   final String name;
   final String description;
@@ -22,13 +22,13 @@ class Place {
     required bool isFavorite,
   }) : _isFavorite = isFavorite;
 
-  factory Place.fromEntity(PlaceEntity entity) {
+  factory Place.fromDto(PlaceDto dto) {
     return Place(
-      id: entity.id,
-      imageSrc: entity.imageSrc,
-      name: entity.name,
-      description: entity.description,
-      isFavorite: entity.isFavorite == 1,
+      id: dto.id,
+      imageSrc: dto.imageSrc,
+      name: dto.name,
+      description: dto.description,
+      isFavorite: dto.isFavorite,
     );
   }
 

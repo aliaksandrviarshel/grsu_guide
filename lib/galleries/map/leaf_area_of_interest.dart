@@ -6,7 +6,7 @@ import 'area_of_interest.dart';
 import 'relative_area.dart';
 
 class LeafAreaOfInterest implements AreaOfInterest {
-  final int placeId;
+  final String placeId;
   final GlobalKey _imageKey;
   final void Function(LeafAreaOfInterest) onTapped;
 
