@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:grsu_guide/navigation/navigation_item.dart';
+import '../navigation/routes.dart';
 
 import 'favorites_page_background.dart';
 

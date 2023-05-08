@@ -8,6 +8,7 @@ import 'package:grsu_guide/settings/widgets/settings_items/about_developers_item
 import 'package:grsu_guide/settings/widgets/settings_items/language_item.dart';
 import 'package:grsu_guide/settings/widgets/settings_items/theme_item.dart';
 
+import '../../navigation/routes.dart';
 import '../widgets/settings_items/for_left_handed_item.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _SettingsPageState extends State<SettingsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppBackButton(onPressed: () {
-                  Navigator.of(context).pushNamed('/galleries_map');
+                  Navigator.of(context).pushNamed(Routes.galleriesMap);
                 }),
                 Text(AppLocalizations.of(context)!.settings,
                     style: const TextStyle(

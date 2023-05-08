@@ -8,6 +8,7 @@ import 'petal/petal_sizer.dart';
 import 'petal/rotated_petal.dart';
 import 'petal/rotated_petal_controller.dart';
 import 'petal/rotation_handler/right_rotation_handler.dart';
+import 'routes.dart';
 
 enum NavWheelAlignment { left, right }
 

@@ -2,25 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Routes {
-  static const galleriesMap = '/galleries_map';
-  static const academicBuildings = '/academic_buildings';
-  static const libraries = '/libraries';
-  static const favorites = '/favorites';
-  static const cafes = '/cafes';
-  static const dormitories = '/dormitories';
-  static const architecture = '/architecture';
-  static const leisure = '/leisure';
-  static const artStores = '/art_stores';
-  static const virtualGallery = '/virtual_gallery';
-  static const settings = '/settings';
-}
+import 'routes.dart';
 
 class NavigationItem {
   final String name;
   final Widget smallIcon;
   final Widget largeIcon;
-  final void Function(BuildContext) onTap;
   final String route;
   final String routeName;
   late final bool isRoot;
@@ -31,7 +18,6 @@ class NavigationItem {
     required this.name,
     required this.smallIcon,
     required this.largeIcon,
-    required this.onTap,
   }) {
     isRoot = [
       Routes.academicBuildings,
@@ -67,18 +53,17 @@ class NavigationItem {
 getNavItems(BuildContext context) => [
       NavigationItem(
         route: Routes.galleriesMap,
-        routeName: '/galleries_map',
+        routeName: Routes.galleriesMap,
         name: AppLocalizations.of(context)!.exhibitionHallsAndGalleries,
         smallIcon: Image.asset(
           'assets/icons/navigation/galleries_small.png',
           width: 30,
         ),
         largeIcon: Image.asset('assets/icons/navigation/galleries_large.png'),
-        onTap: (BuildContext context) => print('bruh'),
       ),
       NavigationItem(
         route: Routes.academicBuildings,
-        routeName: '/academic_buildings',
+        routeName: Routes.academicBuildings,
         name: AppLocalizations.of(context)!.academicBuildingsAndPersonalities,
         smallIcon: Image.asset(
           'assets/icons/navigation/academic_buildings_small.png',
@@ -86,22 +71,20 @@ getNavItems(BuildContext context) => [
         ),
         largeIcon:
             Image.asset('assets/icons/navigation/academic_buildings_large.png'),
-        onTap: (BuildContext context) => print('bruh'),
       ),
       NavigationItem(
         route: Routes.libraries,
-        routeName: '/libraries',
+        routeName: Routes.libraries,
         name: AppLocalizations.of(context)!.librariesAndReadingRooms,
         smallIcon: Image.asset(
           'assets/icons/navigation/libraries_small.png',
           width: 30,
         ),
         largeIcon: Image.asset('assets/icons/navigation/libraries_large.png'),
-        onTap: (BuildContext context) => print('bruh'),
       ),
       NavigationItem(
         route: Routes.favorites,
-        routeName: '/favorites',
+        routeName: Routes.favorites,
         name: AppLocalizations.of(context)!.favorites,
         smallIcon: Image.asset(
           'assets/icons/navigation/favorites_small.png',
@@ -109,34 +92,30 @@ getNavItems(BuildContext context) => [
         ),
         largeIcon: Image.asset('assets/icons/navigation/favorites_large.png',
             width: 120),
-        onTap: (BuildContext context) =>
-            Navigator.pushNamed(context, '/favorite_list'),
       ),
       NavigationItem(
         route: Routes.cafes,
-        routeName: '/cafes',
+        routeName: Routes.cafes,
         name: AppLocalizations.of(context)!.cafeDiningRooms,
         smallIcon: Image.asset(
           'assets/icons/navigation/cafes_small.png',
           width: 30,
         ),
         largeIcon: Image.asset('assets/icons/navigation/cafes_large.png'),
-        onTap: (BuildContext context) => print('bruh'),
       ),
       NavigationItem(
         route: Routes.dormitories,
-        routeName: '/dormitories',
+        routeName: Routes.dormitories,
         name: AppLocalizations.of(context)!.dormitories,
         smallIcon: Image.asset(
           'assets/icons/navigation/dormitories_small.png',
           width: 30,
         ),
         largeIcon: Image.asset('assets/icons/navigation/dormitories_large.png'),
-        onTap: (BuildContext context) => print('bruh'),
       ),
       NavigationItem(
         route: Routes.architecture,
-        routeName: '/architecture',
+        routeName: Routes.architecture,
         name: AppLocalizations.of(context)!.architecture,
         smallIcon: Image.asset(
           'assets/icons/navigation/architecture_small.png',
@@ -144,22 +123,20 @@ getNavItems(BuildContext context) => [
         ),
         largeIcon:
             Image.asset('assets/icons/navigation/architecture_large.png'),
-        onTap: (BuildContext context) => print('bruh'),
       ),
       NavigationItem(
         route: Routes.leisure,
-        routeName: '/leisure',
+        routeName: Routes.leisure,
         name: AppLocalizations.of(context)!.leisure,
         smallIcon: Image.asset(
           'assets/icons/navigation/leisure_small.png',
           width: 30,
         ),
         largeIcon: Image.asset('assets/icons/navigation/leisure_large.png'),
-        onTap: (BuildContext context) => print('bruh'),
       ),
       NavigationItem(
         route: Routes.artStores,
-        routeName: '/art_stores',
+        routeName: Routes.architecture,
         name: AppLocalizations.of(context)!.artShopsAndPhotoStudios,
         smallIcon: Image.asset(
           'assets/icons/navigation/art_stores_small.png',
@@ -167,12 +144,10 @@ getNavItems(BuildContext context) => [
         ),
         largeIcon: Image.asset('assets/icons/navigation/art_stores_large.png',
             width: 120),
-        onTap: (BuildContext context) =>
-            Navigator.pushNamed(context, '/nav_art'),
       ),
       NavigationItem(
         route: Routes.virtualGallery,
-        routeName: '/virtual_gallery',
+        routeName: Routes.virtualGallery,
         name: AppLocalizations.of(context)!.virtualGallery,
         smallIcon: Image.asset(
           'assets/icons/navigation/virtual_gallery_small.png',
@@ -182,12 +157,10 @@ getNavItems(BuildContext context) => [
           'assets/icons/navigation/virtual_gallery_large.png',
           height: 110,
         ),
-        onTap: (BuildContext context) =>
-            Navigator.pushNamed(context, '/virtual_gallery'),
       ),
       NavigationItem(
         route: Routes.settings,
-        routeName: '/settings',
+        routeName: Routes.settings,
         name: AppLocalizations.of(context)!.settings,
         smallIcon: Image.asset(
           'assets/icons/navigation/settings_small.png',
@@ -195,7 +168,5 @@ getNavItems(BuildContext context) => [
         ),
         largeIcon: Image.asset('assets/icons/navigation/settings_large.png',
             height: 110),
-        onTap: (BuildContext context) =>
-            Navigator.pushNamed(context, '/settings'),
       ),
     ];

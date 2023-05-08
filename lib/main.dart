@@ -16,7 +16,7 @@ import 'favorites/favorites_page.dart';
 import 'galleries/screens/map_page.dart';
 import 'galleries/services/map_service.dart';
 import 'navigation/app_drawer_factory.dart';
-import 'navigation/navigation_item.dart';
+import 'navigation/routes.dart';
 import 'settings/app_settings.dart';
 import 'splash/splash_screen.dart';
 

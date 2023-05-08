@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:grsu_guide/navigation/routes.dart';
 import 'package:grsu_guide/splash/fake_progress_indicator.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
             padding: EdgeInsets.only(top: _paddingTop),
             duration: const Duration(milliseconds: 1000),
             onEnd: () {
-              Navigator.pushReplacementNamed(context, '/galleries_map');
+              Navigator.pushReplacementNamed(context, Routes.galleriesMap);
             },
             curve: Curves.easeInOut,
             child: Column(
