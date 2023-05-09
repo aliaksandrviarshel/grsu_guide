@@ -34,6 +34,7 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
     final place = widget.place;
     final colorScheme = Theme.of(context).colorScheme;
     var imageHeight = MediaQuery.of(context).size.height * .4;
+    var imageWidth = MediaQuery.of(context).size.width * .6;
 
     return SingleChildScrollView(
       child: Container(
@@ -62,12 +63,16 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
                           child: Image.network(
                             place.imageSrc,
                             height: imageHeight,
+                            width: imageWidth,
+                            fit: BoxFit.cover,
                             loadingBuilder: (context, child, loadingProgress) {
                               if (loadingProgress == null) {
                                 return child;
                               }
 
-                              return Container(height: imageHeight, child: const DottedProgressIndicator());
+                              return SizedBox(
+                                  height: imageHeight,
+                                  child: const DottedProgressIndicator());
                             },
                           ),
                         ),
