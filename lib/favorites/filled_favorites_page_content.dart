@@ -170,7 +170,8 @@ class _PlaceCardState extends State<_PlaceCard> {
                       children: [
                         Image.network(
                           width: 88,
-                          fit: BoxFit.fitWidth,
+                          height: 88,
+                          fit: BoxFit.cover,
                           widget.place.imageSrc,
                         ),
                         Container(
@@ -190,11 +191,18 @@ class _PlaceCardState extends State<_PlaceCard> {
                       ],
                     ),
                   ),
-                  Text(
-                    widget.place.name,
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Theme.of(context).colorScheme.onSecondary),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        widget.place.name * 7,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
