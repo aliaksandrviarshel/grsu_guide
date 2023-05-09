@@ -21,9 +21,9 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   List<Widget> get items => [
         const ForLeftHandedItem(),
-        const AboutDevelopersItem(),
         const LanguageItem(),
         const ThemeItem(),
+        const AboutDevelopersItem(),
       ];
 
   @override
