@@ -98,7 +98,7 @@ class _MapPageState extends State<MapPage>
                           children: [
                             Image.network(
                               key: _imageKey,
-                              snapshot.requireData!,
+                              snapshot.requireData,
                               loadingBuilder:
                                   (context, child, loadingProgress) {
                                 if (loadingProgress == null) {
@@ -225,21 +225,28 @@ class Marker extends StatefulWidget {
 
 class _MarkerState extends State<Marker> {
   double _position = 0.0;
+  late final Timer _timer;
 
   @override
   void initState() {
     super.initState();
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
       _position = _position == 0 ? 8 : 0;
       setState(() {});
     });
   }
 
   @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: widget.area.rect.top - 40,
-      left: widget.area.rect.left + 10,
+      top: widget.area.rect.top - 42,
+      left: widget.area.rect.center.dx - 12,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeIn,
