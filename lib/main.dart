@@ -75,15 +75,16 @@ class _MyAppState extends State<MyApp> {
         Routes.galleriesMap: (context) => const MapPage(mapId: 'galleries'),
         Routes.academicBuildings: (context) =>
             const MapPage(mapId: 'academicBuildings'),
-        Routes.virtualGallery: (context) => const VirtualGalleryPage(),
-        Routes.favorites: (context) => const FavoritesPage(),
-        Routes.settings: (context) => const SettingsPage(),
-        Routes.libraries: (context) => const UnfinishedPage(),
-        Routes.cafes: (context) => const UnfinishedPage(),
-        Routes.dormitories: (context) => const UnfinishedPage(),
-        Routes.architecture: (context) => const UnfinishedPage(),
-        Routes.leisure: (context) => const UnfinishedPage(),
-        Routes.artStores: (context) => const UnfinishedPage(),
+        Routes.virtualGallery: (context) => 
+            const MapPage(mapId: 'virtualGallery'),
+        Routes.favorites: (context) => const MapPage(mapId: 'favorites'),
+        Routes.settings: (context) => const MapPage(mapId: 'settings'),
+        Routes.libraries: (context) => const MapPage(mapId: 'libraries'),
+        Routes.cafes: (context) => const MapPage(mapId: 'cafes'),
+        Routes.dormitories: (context) => const MapPage(mapId: 'dormitories'),
+        Routes.architecture: (context) => const MapPage(mapId: 'architecture'),
+        Routes.leisure: (context) => const MapPage(mapId: 'leisure'),
+        Routes.artStores: (context) => const MapPage(mapId: 'artStores'),
       },
     );
   }

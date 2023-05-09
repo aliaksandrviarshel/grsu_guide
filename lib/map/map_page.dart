@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import 'package:grsu_guide/_common/connection_checker/connection_checker.dart';
 import 'package:grsu_guide/_common/guide/tour_guide.dart';
+import 'package:grsu_guide/_common/unfinished_page/unfinished_page.dart';
 import 'package:grsu_guide/map/bottom_sheet/place.dart';
 import 'package:grsu_guide/map/map/leaf_area_of_interest.dart';
 
@@ -69,6 +70,10 @@ class _MapPageState extends State<MapPage>
                 return const DottedProgressIndicator();
               }
 
+              if (snapshot.requireData.isEmpty) {
+                return const UnfinishedPage();
+              }
+
               return Stack(
                 fit: StackFit.expand,
                 children: [
@@ -93,7 +98,7 @@ class _MapPageState extends State<MapPage>
                           children: [
                             Image.network(
                               key: _imageKey,
-                              snapshot.requireData,
+                              snapshot.requireData!,
                               loadingBuilder:
                                   (context, child, loadingProgress) {
                                 if (loadingProgress == null) {

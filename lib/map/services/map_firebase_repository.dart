@@ -9,6 +9,10 @@ class MapFirebaseRepository implements MapRepository {
   Future<String> getImageSrc(String mapId) async {
     final documentSnapshot =
         await FirebaseFirestore.instance.collection('maps').doc(mapId).get();
+    if (!documentSnapshot.exists) {
+      return '';
+    }
+
     final mapDto =
         MapDto.fromMap(documentSnapshot.data() as Map<String, dynamic>);
     return mapDto.imageSrc;
