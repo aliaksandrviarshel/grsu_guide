@@ -2,8 +2,9 @@ import 'package:flutter/widgets.dart';
 
 import 'package:collection/collection.dart';
 
-import 'package:grsu_guide/map/map/relative_area.dart';
 import 'package:grsu_guide/map/bottom_sheet/place.dart';
+import 'package:grsu_guide/map/map/leaf_area_of_interest.dart';
+import 'package:grsu_guide/map/map/relative_area.dart';
 
 import 'area_of_interest.dart';
 import 'interactive_map.dart';
@@ -21,6 +22,9 @@ class ParentAreaOfInterest implements AreaOfInterest {
   final InteractiveMap _map;
   final RelativeArea _relativeArea;
   late Matrix4Tween _tween;
+
+  @override
+  Rect get rect => _relativeArea.rect;
 
   @override
   bool get isLeaf => false;
@@ -167,5 +171,13 @@ class ParentAreaOfInterest implements AreaOfInterest {
       ..translate(x, y)
       ..scale(_defaultScale);
     return matrix;
+  }
+
+  @override
+  List<LeafAreaOfInterest> getLeafAreas() {
+    return _childAreas
+        .where((element) => element.isLeaf)
+        .cast<LeafAreaOfInterest>()
+        .toList();
   }
 }

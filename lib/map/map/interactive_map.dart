@@ -1,9 +1,11 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:collection/collection.dart';
+import 'package:get/get.dart';
 
-import 'package:grsu_guide/map/map/parent_area_of_interest.dart';
 import 'package:grsu_guide/map/bottom_sheet/place.dart';
+import 'package:grsu_guide/map/map/leaf_area_of_interest.dart';
+import 'package:grsu_guide/map/map/parent_area_of_interest.dart';
 
 import 'area_of_interest.dart';
 
@@ -12,6 +14,15 @@ class InteractiveMap {
   final TransformationController _transformationController;
   final void Function(AreaOfInterest) onTapped;
   late final List<AreaOfInterest> _areas;
+  List<AreaOfInterest> get areas {
+    try {
+      _areas.length;
+      return _areas;
+    } catch (e) {
+      return [];
+    }
+  }
+
   set areas(List<AreaOfInterest> areas) => _areas = areas;
 
   InteractiveMap(
@@ -61,5 +72,9 @@ class InteractiveMap {
     if (area != null) {
       await area.imitateTap(place);
     }
+  }
+
+  List<LeafAreaOfInterest> getLeafAreas() {
+    return _areas.mapMany((item) => item.getLeafAreas()).toList();
   }
 }

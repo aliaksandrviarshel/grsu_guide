@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -86,16 +88,23 @@ class _MapPageState extends State<MapPage>
                           ).then((_) => _zoomToInitialPlace(context));
                         }
 
-                        return Image.network(
-                          key: _imageKey,
-                          snapshot.requireData,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) {
-                              return child;
-                            }
+                        return Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            Image.network(
+                              key: _imageKey,
+                              snapshot.requireData,
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                }
 
-                            return const DottedProgressIndicator();
-                          },
+                                return const DottedProgressIndicator();
+                              },
+                            ),
+                            ..._getMarkers()
+                          ],
                         );
                       }),
                     ),
@@ -110,6 +119,11 @@ class _MapPageState extends State<MapPage>
             }),
       ),
     );
+  }
+
+  List<Widget> _getMarkers() {
+    final leafAreas = _map?.getLeafAreas() ?? List<LeafAreaOfInterest>.empty();
+    return leafAreas.map((area) => Marker(area: area)).toList();
   }
 
   Future<void> _zoomToInitialPlace(BuildContext context) async {
@@ -137,6 +151,7 @@ class _MapPageState extends State<MapPage>
       _onAreaTap,
     );
     _map!.init();
+    setState(() {});
   }
 
   Future<void> _onTapUp(TapUpDetails details) async {
@@ -188,5 +203,47 @@ class _MapPageState extends State<MapPage>
     await _map!.zoomOut();
     _showBackArrow = false;
     setState(() {});
+  }
+}
+
+class Marker extends StatefulWidget {
+  final AreaOfInterest area;
+
+  const Marker({
+    super.key,
+    required this.area,
+  });
+
+  @override
+  State<Marker> createState() => _MarkerState();
+}
+
+class _MarkerState extends State<Marker> {
+  double _position = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+      _position = _position == 0 ? 8 : 0;
+      setState(() {});
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: widget.area.rect.top - 40,
+      left: widget.area.rect.left + 10,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeIn,
+        margin: EdgeInsets.only(top: _position),
+        child: Image.asset(
+          'assets/images/map_marker_small.png',
+          width: 30,
+        ),
+      ),
+    );
   }
 }

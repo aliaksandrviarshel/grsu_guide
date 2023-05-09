@@ -9,6 +9,8 @@ class LeafAreaOfInterest implements AreaOfInterest {
   final String placeId;
   final GlobalKey _imageKey;
   final void Function(LeafAreaOfInterest) onTapped;
+  @override
+  Rect get rect => _relativeArea.rect;
 
   final RelativeArea _relativeArea;
 
@@ -53,5 +55,10 @@ class LeafAreaOfInterest implements AreaOfInterest {
   @override
   Future<void> imitateTap(Place place) async {
     onTapped(this);
+  }
+
+  @override
+  List<LeafAreaOfInterest> getLeafAreas() {
+    return [this];
   }
 }
