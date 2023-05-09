@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 
 import 'package:grsu_guide/_common/connection_checker/connection_checker.dart';
 import 'package:grsu_guide/_common/guide/tour_guide.dart';
-import 'package:grsu_guide/map/map/leaf_area_of_interest.dart';
 import 'package:grsu_guide/map/bottom_sheet/place.dart';
+import 'package:grsu_guide/map/map/leaf_area_of_interest.dart';
 
 import '../_common/back_button/app_back_button.dart';
 import '../_common/dotted_progress_indicator/dotted_progress_indicator.dart';
@@ -167,10 +167,6 @@ class _MapPageState extends State<MapPage>
   }
 
   void _openBottomSheet(BuildContext context, LeafAreaOfInterest area) {
-    if (area.placeId == null) {
-      return;
-    }
-
     Get.find<PlacesService>().getPlace(area.placeId).then((place) {
       showModalBottomSheet(
         context: context,
