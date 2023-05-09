@@ -1,4 +1,6 @@
 class Routes {
+  static const defaultRoute = academicBuildings;
+
   static const galleriesMap = '/galleries';
   static const academicBuildings = '/academicBuildings';
   static const libraries = '/libraries';

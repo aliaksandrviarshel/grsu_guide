@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
             padding: EdgeInsets.only(top: _paddingTop),
             duration: const Duration(milliseconds: 1000),
             onEnd: () {
-              Navigator.pushReplacementNamed(context, Routes.galleriesMap);
+              Navigator.pushReplacementNamed(context, Routes.defaultRoute);
             },
             curve: Curves.easeInOut,
             child: Column(

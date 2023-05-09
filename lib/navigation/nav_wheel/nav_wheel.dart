@@ -28,7 +28,6 @@ class _NavWheelState extends State<NavWheel> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     _navItems = [
-      NavigationItem.fromRoute(Routes.galleriesMap, context),
       NavigationItem.fromRoute(Routes.academicBuildings, context),
       NavigationItem.fromRoute(Routes.libraries, context),
       NavigationItem.fromRoute(Routes.favorites, context),
@@ -39,6 +38,7 @@ class _NavWheelState extends State<NavWheel> with TickerProviderStateMixin {
       NavigationItem.fromRoute(Routes.artStores, context),
       NavigationItem.fromRoute(Routes.virtualGallery, context),
       NavigationItem.fromRoute(Routes.settings, context),
+      NavigationItem.fromRoute(Routes.galleriesMap, context),
     ];
 
     final shiftedIndexes = _getShiftedIndexes(context);

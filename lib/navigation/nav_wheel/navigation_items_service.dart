@@ -22,16 +22,6 @@ class NavigationItemsService {
   List<NavigationItem> _getNavItems(BuildContext context) {
     return [
       NavigationItem(
-        route: Routes.galleriesMap,
-        routeName: Routes.galleriesMap,
-        name: AppLocalizations.of(context)!.exhibitionHallsAndGalleries,
-        smallIcon: Image.asset(
-          'assets/icons/navigation/galleries_small.png',
-          width: 30,
-        ),
-        largeIcon: Image.asset('assets/icons/navigation/galleries_large.png'),
-      ),
-      NavigationItem(
         route: Routes.academicBuildings,
         routeName: Routes.academicBuildings,
         name: AppLocalizations.of(context)!.academicBuildingsAndPersonalities,
@@ -138,6 +128,16 @@ class NavigationItemsService {
         ),
         largeIcon: Image.asset('assets/icons/navigation/settings_large.png',
             height: 110),
+      ),
+      NavigationItem(
+        route: Routes.galleriesMap,
+        routeName: Routes.galleriesMap,
+        name: AppLocalizations.of(context)!.exhibitionHallsAndGalleries,
+        smallIcon: Image.asset(
+          'assets/icons/navigation/galleries_small.png',
+          width: 30,
+        ),
+        largeIcon: Image.asset('assets/icons/navigation/galleries_large.png'),
       ),
     ];
   }

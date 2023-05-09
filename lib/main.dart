@@ -6,7 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import 'package:grsu_guide/_common/unfinished_page/unfinished_page.dart';
 import 'package:grsu_guide/map/services/map_firebase_repository.dart';
 import 'package:grsu_guide/map/services/map_repository.dart';
 import 'package:grsu_guide/map/services/places_firebase_repository.dart';
@@ -72,13 +71,12 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
-        Routes.galleriesMap: (context) => const MapPage(mapId: 'galleries'),
         Routes.academicBuildings: (context) =>
             const MapPage(mapId: 'academicBuildings'),
-        Routes.virtualGallery: (context) => 
-            const MapPage(mapId: 'virtualGallery'),
-        Routes.favorites: (context) => const MapPage(mapId: 'favorites'),
-        Routes.settings: (context) => const MapPage(mapId: 'settings'),
+        Routes.galleriesMap: (context) => const MapPage(mapId: 'galleries'),
+        Routes.virtualGallery: (context) => const VirtualGalleryPage(),
+        Routes.favorites: (context) => const FavoritesPage(),
+        Routes.settings: (context) => const SettingsPage(),
         Routes.libraries: (context) => const MapPage(mapId: 'libraries'),
         Routes.cafes: (context) => const MapPage(mapId: 'cafes'),
         Routes.dormitories: (context) => const MapPage(mapId: 'dormitories'),

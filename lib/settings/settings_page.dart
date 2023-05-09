@@ -38,7 +38,7 @@ class _SettingsPageState extends State<SettingsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppBackButton(onPressed: () {
-                  Navigator.of(context).pushNamed(Routes.galleriesMap);
+                  Navigator.of(context).pushNamed(Routes.defaultRoute);
                 }),
                 Text(AppLocalizations.of(context)!.settings,
                     style: const TextStyle(

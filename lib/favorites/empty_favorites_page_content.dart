@@ -70,7 +70,7 @@ class _AddPlaceButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.of(context).pushReplacementNamed(Routes.galleriesMap);
+        Navigator.of(context).pushReplacementNamed(Routes.defaultRoute);
       },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
