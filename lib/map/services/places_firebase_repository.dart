@@ -9,10 +9,7 @@ import 'place_dto.dart';
 
 class PlacesFirebaseRepository implements PlacesRepository {
   final _settings = Get.find<AppSettings>();
-  final _languageCodeCollectionPathMap = {
-    'ru': 'places',
-    'en': 'places_en'
-  };
+  final _languageCodeCollectionPathMap = {'ru': 'places', 'en': 'places_en'};
 
   @override
   Future<List<PlaceDto>> getPlaces() async {
