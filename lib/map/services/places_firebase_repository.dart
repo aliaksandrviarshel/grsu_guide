@@ -16,7 +16,7 @@ class PlacesFirebaseRepository implements PlacesRepository {
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection(_getCollectionPath()).get();
     return querySnapshot.docs
-        .map((e) => PlaceDto.fromMap(e.data() as Map<String, dynamic>))
+        .map((e) => PlaceDto.fromMap(e.data() as Map<String, dynamic>, e.id))
         .toList();
   }
 
@@ -27,7 +27,7 @@ class PlacesFirebaseRepository implements PlacesRepository {
         .doc(placeId)
         .get();
     var data = documentSnapshot.data();
-    return PlaceDto.fromMap(data as Map<String, dynamic>);
+    return PlaceDto.fromMap(data as Map<String, dynamic>, placeId);
   }
 
   String _getCollectionPath() {

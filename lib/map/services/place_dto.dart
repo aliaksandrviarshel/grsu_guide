@@ -28,9 +28,9 @@ class PlaceDto {
     };
   }
 
-  factory PlaceDto.fromMap(Map<String, dynamic> map) {
+  factory PlaceDto.fromMap(Map<String, dynamic> map, String placeId) {
     return PlaceDto(
-      id: map['id'] as String,
+      id: placeId,
       mapId: map['mapId'] as String,
       imageSrc: map['imageSrc'] as String,
       name: map['name'] as String,
@@ -40,7 +40,4 @@ class PlaceDto {
   }
 
   String toJson() => json.encode(toMap());
-
-  factory PlaceDto.fromJson(String source) =>
-      PlaceDto.fromMap(json.decode(source) as Map<String, dynamic>);
 }

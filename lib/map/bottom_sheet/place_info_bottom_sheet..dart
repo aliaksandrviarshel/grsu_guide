@@ -35,11 +35,12 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
     final colorScheme = Theme.of(context).colorScheme;
     var imageHeight = MediaQuery.of(context).size.height * .4;
     var imageWidth = MediaQuery.of(context).size.width * .6;
+    var bottomSheetHeight = MediaQuery.of(context).size.height * .9;
 
     return SingleChildScrollView(
       child: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
-        height: MediaQuery.of(context).size.height * .9,
+        height: bottomSheetHeight,
         child: Stack(
           children: [
             Positioned(
@@ -80,6 +81,10 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
                     ),
                     Container(
                       color: Theme.of(context).colorScheme.background,
+                      constraints: BoxConstraints(
+                        // TODO: fix this temporary solution
+                        minHeight: bottomSheetHeight - imageHeight,
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 44),
                         child: Column(
@@ -116,7 +121,7 @@ class _PlaceInfoBottomSheetState extends State<PlaceInfoBottomSheet> {
                             Text(
                               place.description,
                               style: TextStyle(color: colorScheme.onBackground),
-                            )
+                            ),
                           ],
                         ),
                       ),
