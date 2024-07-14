@@ -128,7 +128,16 @@ class _MapPageState extends State<MapPage>
 
   List<Widget> _getMarkers() {
     final leafAreas = _map?.getLeafAreas() ?? List<LeafAreaOfInterest>.empty();
-    return leafAreas.map((area) => Marker(area: area)).toList();
+    return leafAreas
+        .map((area) => Marker(
+              area: area,
+              onAreaTap: (area) {
+                if (!_showGuide) {
+                  _onAreaTap(area);
+                }
+              },
+            ))
+        .toList();
   }
 
   Future<void> _zoomToInitialPlace(BuildContext context) async {
@@ -213,11 +222,9 @@ class _MapPageState extends State<MapPage>
 
 class Marker extends StatefulWidget {
   final AreaOfInterest area;
+  final void Function(AreaOfInterest) onAreaTap;
 
-  const Marker({
-    super.key,
-    required this.area,
-  });
+  const Marker({super.key, required this.area, required this.onAreaTap});
 
   @override
   State<Marker> createState() => _MarkerState();
@@ -251,9 +258,12 @@ class _MarkerState extends State<Marker> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeIn,
         margin: EdgeInsets.only(top: _position),
-        child: Image.asset(
-          'assets/images/map_marker_small.png',
-          width: 30,
+        child: GestureDetector(
+          child: Image.asset(
+            'assets/images/map_marker_small.png',
+            width: 30,
+          ),
+          onTap: () => widget.onAreaTap(widget.area),
         ),
       ),
     );
